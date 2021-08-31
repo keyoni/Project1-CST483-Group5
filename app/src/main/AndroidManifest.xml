@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project1CST483Group5">
+        <activity android:name=".MoreInfo"></activity>
+        <activity android:name=".Search" />
+        <activity android:name=".Favorites" />
+        <activity android:name=".CreateAnAccount" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

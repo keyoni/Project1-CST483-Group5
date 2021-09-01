@@ -14,7 +14,7 @@ public class Pet {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "petID")
-    private final Integer mPetID;
+    private Integer mPetID;
 
     //@ForeignKey()
     @NonNull
@@ -34,16 +34,17 @@ public class Pet {
     private String mGender;
 
     @NonNull
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "id") //from the api
     private Integer mID;
 
 
-    public Pet(@NonNull Integer petID, @NonNull Integer mUserID, @NonNull String mName, @NonNull String mType, @NonNull String mGender, @NonNull Integer mID) {this.mPetID = petID;
+    public Pet(@NonNull Integer mUserID, @NonNull String mName, @NonNull String mType, @NonNull String mGender, @NonNull Integer mID) {
+        Integer petID;
         this.mUserID = mUserID;
         this.mName = mName;
         this.mType = mType;
         this.mGender = mGender;
-        this.mID = mID;
+        this.mID = mID; //from api
     }
 
     public Integer getPet(){return this.mPetID;}

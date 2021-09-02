@@ -10,6 +10,8 @@ public class PetRepository {
 
     private PetDao mPetDao;
     private LiveData<List<Pet>> mAllPets;
+    private LiveData<List<Pet>> mAllFavorites;
+
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -19,6 +21,7 @@ public class PetRepository {
         AppDatabase db = AppDatabase.getDatabase(application);
         mPetDao = db.petDao();
         mAllPets = mPetDao.getPetsByIDs();
+
     }
 
     // Room executes all queries on a separate thread.
@@ -33,6 +36,11 @@ public class PetRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             mPetDao.insert(pet);
         });
+    }
+
+    LiveData<List<Pet>> getAllFavorites(Integer mUserID){
+            mAllFavorites = mPetDao.getPetsByUserID(mUserID);
+            return mAllFavorites;
     }
 
 }

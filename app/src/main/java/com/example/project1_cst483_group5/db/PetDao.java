@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 
 
 import java.util.List;
@@ -28,5 +29,14 @@ public interface PetDao {
     @Query("SELECT * FROM pet_table ORDER BY petID ASC")
     LiveData<List<Pet>> getPetsByIDs(); //livedata to update changed data that is being observed
 
-//    @Query("SELECT * FROM pet_table WHERE userID == )
+    @Query ("SELECT * FROM pet_table WHERE userID = :mUserID")
+    LiveData<List<Pet>> getPetsByUserID(Integer mUserID);
+
+    //* these querries are only needed in the user_table
+//    @Query ("SELECT * FROM pet_table WHERE type = :mType")
+//    LiveData<List<Pet>> getPetsByType(String mType);
+//
+//    @Query ("SELECT * FROM pet_table WHERE gender = :mGender")
+//    LiveData<List<Pet>> getPetsBygender(String mGender);
+
 }

@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C0A377"
     tools:context=".CreateAnAccount">
+
+    <!--Creating a Account label to be displayed on the top -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Create an Account"
+        android:textColor="@color/black"
+        android:textSize="45dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="114dp" />
 
     <EditText
         android:id="@+id/etFirstName"
@@ -13,7 +27,7 @@
         android:layout_marginTop="242dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/first_name"
+        android:hint="@string/first_name"
         app:layout_constraintBottom_toTopOf="@+id/etCreateEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -28,6 +42,7 @@
         android:layout_marginBottom="100dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:hint="@string/password"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -39,8 +54,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
+
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:hint="@string/email"
         app:layout_constraintBottom_toTopOf="@+id/etCreatePassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -51,12 +68,13 @@
         android:id="@+id/btnCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="24dp"
         android:layout_marginBottom="183dp"
         android:text="@string/create_an_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCreatePassword" />
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayoutCompat"
     android:layout_width="match_parent"
+    android:background="#C0A377"
     android:layout_height="wrap_content">
 
     <TextView
@@ -41,6 +42,7 @@
         android:text="Type Placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvGenderSearch"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -54,7 +56,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameSearch"
         app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="242dp" />
+        tools:layout_editor_absoluteX="242dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/ivInfoSearch"

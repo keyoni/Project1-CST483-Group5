@@ -2,10 +2,8 @@
     <string name="app_name">Project1-CST483-Group5</string>
     <string name="app_title">APPA APP</string>
     <string name="login">Login</string>
-    <string name="create_an_account">Create Account</string>
+    <string name="create_an_account">Create an Account</string>
     <string name="first_name">First Name</string>
-    <string name="password"> Password </string>
-    <string name="email"> Email</string>
     <string name="yip_yip">Yip Yip</string>
     <string name="search">Search</string>
     <string name="logout">Logout</string>

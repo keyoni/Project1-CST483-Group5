@@ -47,56 +47,57 @@ public class Pet {
         this.mID = mID; //from api
     }
 
-    public Integer getPet(){return this.mPetID;}
-
+    @NonNull
+    public void setMPetID(Integer mPetID){this.mPetID =mPetID; }
 
     @NonNull
-    public Integer getmID() {
-        return mID;
-    }
-
-    public void setmID(@NonNull Integer mID) {
-        this.mID = mID;
-    }
-
-    @NonNull
-    public Integer getmPetID() {
+    public Integer getMPetID() {
         return mPetID;
     }
 
     @NonNull
-    public Integer getmUserID() {
+    public Integer getMID() {
+        return mID;
+    }
+
+    public void setMID(@NonNull Integer mID) {
+        this.mID = mID;
+    }
+
+
+    @NonNull
+    public Integer getMUserID() {
         return mUserID;
     }
 
-    public void setmUserID(@NonNull Integer mUserID) {
+    public void setMUserID(@NonNull Integer mUserID) {
         this.mUserID = mUserID;
     }
 
     @NonNull
-    public String getmName() {
+    public String getMName() {
         return mName;
     }
 
-    public void setmName(@NonNull String mName) {
+    public void setMName(@NonNull String mName) {
         this.mName = mName;
     }
 
     @NonNull
-    public String getmType() {
+    public String getMType() {
         return mType;
     }
 
-    public void setmType(@NonNull String mType) {
+    public void setMType(@NonNull String mType) {
         this.mType = mType;
     }
 
     @NonNull
-    public String getmGender() {
+    public String getMGender() {
         return mGender;
     }
 
-    public void setmGender(@NonNull String mGender) {
+    public void setMGender(@NonNull String mGender) {
         this.mGender = mGender;
     }
 }

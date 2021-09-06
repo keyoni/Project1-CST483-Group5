@@ -3,8 +3,6 @@ package com.example.project1_cst483_group5.db;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import androidx.lifecycle.LiveData;
-
 public class UserRepository {
     private UserDao mUserDao;
 
@@ -13,18 +11,28 @@ public class UserRepository {
         mUserDao = db.userDao();
     }
 
+    public void insert(User user) {
+        new InsertUserAsyncTask(mUserDao).execute(user);
 
-    void insert(User user) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            mUserDao.insert(user);
-        });
     }
 
-    String getName(int userId) {
-          return  mUserDao.getName(userId);
+
+}
+
+ class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {
+
+    private UserDao mUserDao;
+
+    InsertUserAsyncTask(UserDao mUserDao) {
+        this.mUserDao = mUserDao;
+
     }
 
-    int getUserCount() {
-        return mUserDao.getUserCount();
+    @Override
+    protected Void doInBackground(User... user) {
+        mUserDao.insert(user[0]);
+        return null;
     }
+
+
 }

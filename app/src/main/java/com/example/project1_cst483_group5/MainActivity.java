@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if(view.getId() == R.id.btnCreateAccount){
             Intent i = new Intent(this, CreateAnAccount.class);
-            startActivity(i);
+            startActivity(i); //
         }
     }
 }

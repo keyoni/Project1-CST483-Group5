@@ -12,18 +12,24 @@
         android:textStyle="bold"
         android:textSize="25dp"
         android:layout_gravity="center"
+        android:padding="25dp"
         />
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-            <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="logout"
-            android:layout_gravity="bottom"
-            android:background="#156498"
-            android:layout_alignParentBottom="true"
-            />
-    </RelativeLayout>
+        android:text="Change password"
+        android:background="#156498"
+        android:padding="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        android:background="#156498"
+        android:padding="10dp"
+        />
 </LinearLayout>

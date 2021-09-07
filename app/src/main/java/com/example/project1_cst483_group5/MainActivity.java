@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             createUsers();
         }
 
-        getAuth();
+      //getAuth();
     }
 
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getAuth() {
-
+        Log.d("API TEST", "helloooo");
         Call<AuthApi> authCall = PetFinderClient.getInstance().getPetFinderApi().Auth();
 
         authCall.enqueue(new Callback<AuthApi>() {

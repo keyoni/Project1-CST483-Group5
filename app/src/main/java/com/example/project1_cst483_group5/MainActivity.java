@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View createAccountButton = findViewById(R.id.btnCreateAccount);
         createAccountButton.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btnCreateAccount){

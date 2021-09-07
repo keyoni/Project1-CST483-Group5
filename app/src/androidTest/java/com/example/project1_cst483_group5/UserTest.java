@@ -77,6 +77,13 @@ public class UserTest {
         assertEquals(1,userDao.getUserCount());
     }
 
+    @Test
+    public void getUserByLogin() {
+        User tempUser = new User ("User", "user","Password");
+        userDao.insert(tempUser);
+        userDao.getUsersByUsernameAndPassword("user","password");
+        assertEquals(tempUser.getMPassword(),userDao.getUsersByUsernameAndPassword("user", "Password").get(0).getMPassword());
+    }
 
 
 

@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "user_table")
 public class User {
 
@@ -67,5 +69,16 @@ public class User {
         this.mPassword = mPassword;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return mUserID.equals(user.mUserID) && mName.equals(user.mName) && mUsername.equals(user.mUsername) && mPassword.equals(user.mPassword);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(mUserID, mName, mUsername, mPassword);
+    }
 }

@@ -5,8 +5,13 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.List;
+
 public class UserRepository {
     private UserDao mUserDao;
+    private String name;
+    private int userCount;
+    private User currentUser;
 
     public UserRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
@@ -21,10 +26,24 @@ public class UserRepository {
     }
 
     String getName(int userId) {
-          return  mUserDao.getName(userId);
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            name = mUserDao.getName(userId);
+        });
+        return name;
     }
 
     int getUserCount() {
-        return mUserDao.getUserCount();
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            userCount = mUserDao.getUserCount();
+        });
+        return userCount;
+    }
+
+    User getUserByUsernameAndPassword(String mUsername, String mPassword) {
+
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+           currentUser = mUserDao.getUsersByUsernameAndPassword(mUsername,mPassword).get(0);
+        });
+        return currentUser;
     }
 }

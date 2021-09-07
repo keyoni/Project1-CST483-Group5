@@ -28,4 +28,8 @@ public class UserViewModel extends AndroidViewModel {
      public int getUserCount() {
          return userRepo.getUserCount();
      }
+
+     public User getUsersByUsernameAndPassword(String mUsername, String mPassword) {
+        return userRepo.getUserByUsernameAndPassword(mUsername,mPassword);
+     }
 }

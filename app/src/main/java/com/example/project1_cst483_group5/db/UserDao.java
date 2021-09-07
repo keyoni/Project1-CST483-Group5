@@ -17,7 +17,7 @@ public interface UserDao {
     String getName(Integer mUserID);
 
     @Query("SELECT * FROM user_table WHERE username = :mUsername AND password = :mPassword ")
-    LiveData<List<User>> getUsersByUsernameAndPassword(String mUsername, String mPassword);
+    List<User> getUsersByUsernameAndPassword(String mUsername, String mPassword);
 
     @Query("SELECT COUNT(userID) FROM user_table ")
     int getUserCount();

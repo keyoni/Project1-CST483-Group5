@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -16,7 +17,8 @@ public interface PetFinderApi {
     @POST("oauth2/token")
      Call<AuthApi> Auth(@Body AuthRequest authRequest);
 
-
+    @GET("animals")
+    Call<List<Animal>> getBasicAnimalList();
 
 
 //    @FormUrlEncoded

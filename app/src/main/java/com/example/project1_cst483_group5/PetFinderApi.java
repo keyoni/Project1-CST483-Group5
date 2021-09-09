@@ -17,8 +17,12 @@ public interface PetFinderApi {
     @POST("oauth2/token")
      Call<AuthApi> Auth(@Body AuthRequest authRequest);
 
+
+
     @GET("animals")
-    Call<List<Animal>> getBasicAnimalList();
+    Call<AnimalResults> getBasicAnimalList( @Header("Authorization") String auth);
+
+
 
 
 //    @FormUrlEncoded

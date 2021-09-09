@@ -19,7 +19,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+//import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,29 +69,6 @@ public class MainActivity extends AppCompatActivity {
     private void getAuth() {
         Log.d("API TEST", "helloooo");
 
-//        Gson gson = new GsonBuilder().serializeNulls().create();
-//
-//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .addInterceptor(interceptor)
-//                .build();
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://api.petfinder.com/v2/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .client(client)
-//                .build();
-//
-//        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
-
-
-
-//    Log.d(;"API TEST", petFinderApi.Auth("client_credential",
-//            "upIb9LG0P6ycfE7eAPV93hsrSGFFBvwejt0seHROuLLZekv5gS",
-//            "PNUfd2VyDeiulTuuwpOAv0pvYo3fO8LS1e9eHHfu").url())
-
         AuthRequest authRequest = new AuthRequest("client_credentials",
                 "upIb9LG0P6ycfE7eAPV93hsrSGFFBvwejt0seHROuLLZekv5gS",
                 "PNUfd2VyDeiulTuuwpOAv0pvYo3fO8LS1e9eHHfu");
@@ -127,3 +104,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
+
+
+
+/*          ****Example Code***** */
+
+//        Gson gson = new GsonBuilder().serializeNulls().create();
+//
+//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .addInterceptor(interceptor)
+//                .build();
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://api.petfinder.com/v2/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(client)
+//                .build();
+//
+//        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
+
+
+
+//    Log.d(;"API TEST", petFinderApi.Auth("client_credential",
+//            "upIb9LG0P6ycfE7eAPV93hsrSGFFBvwejt0seHROuLLZekv5gS",
+//            "PNUfd2VyDeiulTuuwpOAv0pvYo3fO8LS1e9eHHfu").url())

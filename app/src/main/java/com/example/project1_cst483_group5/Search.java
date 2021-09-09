@@ -1,4 +1,5 @@
 package com.example.project1_cst483_group5;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -6,8 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.example.project1_cst483_group5.Favorites;
 
 public class Search extends AppCompatActivity {
 
@@ -34,17 +33,17 @@ public class Search extends AppCompatActivity {
     }
 
     public static Intent getIntent(Context context, String auth) {
-        Intent intent = new Intent(context, Search.class);
+        Intent intent = new Intent(context,Search.class);
 
-        intent.putExtra(Search.ACTIVITY_LABEL_AUTH, auth);
+        intent.putExtra(Search.ACTIVITY_LABEL_AUTH,auth);
 
         return intent;
 
     }
 
     public void toFavoritesPage(String auth) {
-        Intent intent = Favorites.getIntent(getApplicationContext(), auth);
-        intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH", auth);
+        Intent intent = Favorites.getIntent(getApplicationContext(),auth);
+        intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH",auth);
         startActivity(intent);
     }
 
@@ -53,4 +52,5 @@ public class Search extends AppCompatActivity {
 
 
     }
+
 }

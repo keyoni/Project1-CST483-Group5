@@ -21,6 +21,8 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void createUsers() {
         for (int i = 0; i < 3; i++) {
-            User tempUser = new User("User" + (i + 1), "user" + (i + 1), "password" + (i + 1));
+            User tempUser = new User("User" + (i + 1),"user" + (i + 1), "password" + (i +1));
             userVM.insert(tempUser);
         }
     }

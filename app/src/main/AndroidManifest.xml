@@ -12,9 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project1CST483Group5">
-        <activity
-            android:name=".ApiTestActivity"
-            android:exported="true" />
         <activity android:name=".MoreInfo" />
         <activity android:name=".Search" />
         <activity android:name=".Favorites" />

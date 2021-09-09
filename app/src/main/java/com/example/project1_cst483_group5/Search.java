@@ -107,11 +107,14 @@ public class Search extends AppCompatActivity {
 //                        e.printStackTrace();
 //                    }
                     AnimalResults animalResults = response.body();
-//                    animalList = response.body();
+                    //animalList = (List<Animal>) animalResults;
 //
                     Animal tempAnimal = new Animal();
-                    tempAnimal = animalResults.getAnimals().get(0);
-                    Log.d("API TEST",""+ tempAnimal.toString());
+                   // tempAnimal = animalResults.animals.get(0);
+
+                  //  Log.d("API TEST",""+ tempAnimal.toString());
+                    Log.d("API TEST",""+ animalResults.animals.get(0).toString());
+
                 }
 
                 @Override

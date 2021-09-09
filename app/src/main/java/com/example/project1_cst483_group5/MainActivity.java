@@ -21,8 +21,6 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-//import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     public UserViewModel userVM;
-    public Button loginBtn,createAccBtn;
+    public Button loginBtn, createAccBtn;
     AuthApi authorization;
 
     @Override
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             createUsers();
         }
 
-      //getAuth();
+        getAuth();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +74,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public void createUsers() {
         for (int i = 0; i < 3; i++) {
-            User tempUser = new User("User" + (i + 1),"user" + (i + 1), "password" + (i +1));
+            User tempUser = new User("User" + (i + 1), "user" + (i + 1), "password" + (i + 1));
             userVM.insert(tempUser);
         }
     }
+
     public void getUsersbyUsernameAndPassword(EditText username, EditText password) {
         String user, pass;
         user = username.getText().toString();
@@ -94,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Bad username/password", Toast.LENGTH_LONG).show();
         }
     }
-//    private void getAuth() {
+
+        private void getAuth() {
 //        Log.d("API TEST", "helloooo");
 //
 //        AuthRequest authRequest = new AuthRequest("client_credentials",
@@ -123,24 +122,22 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 //
-//    }
-
+   }
     public void login() {
         //Intent intent = Favorites.getIntent(getApplicationContext(),authorization.getAccess_token());
-       //intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
+        //intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
 //        startActivity(intent);
         Intent i = new Intent(getApplicationContext(), Favorites.class);
         startActivity(i);
+
 
     }
 
     public static Intent getIntent(Context context, String auth) {
         Intent intent = new Intent(context, Favorites.class);
-
-        intent.putExtra(Favorites.ACTIVITY_LABEL_AUTH,auth);
+        intent.putExtra(Favorites.ACTIVITY_LABEL_AUTH, auth);
 
         return intent;
-
     }
 }
 

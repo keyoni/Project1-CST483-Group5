@@ -2,6 +2,9 @@ package com.example.project1_cst483_group5;
 
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -17,11 +20,20 @@ public class PetFinderClient {
     // private PetFinderApi petFinderApi;
 
 
+//    Gson gson = new GsonBuilder().serializeNulls().create();
+//
+//    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//
+//    OkHttpClient client = new OkHttpClient.Builder()
+//            .addInterceptor(interceptor)
+//            .build();
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.petfinder.com/v2/")
             .addConverterFactory(GsonConverterFactory.create())
+            //.client(client)
             .build();
-
     public static synchronized PetFinderClient getInstance() {
         if (instance == null) {
             instance = new PetFinderClient();

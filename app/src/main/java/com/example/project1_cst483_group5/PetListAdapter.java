@@ -2,6 +2,6 @@
 //
 //import androidx.recyclerview.widget.RecyclerView;
 //
-//public class PetListAdapter extends RecyclerView.Adapter<PetListAdapter.Uer> {
+//public class PetListAdapter extends RecyclerView.Adapter<PetListAdapter.> {
 //}
 //

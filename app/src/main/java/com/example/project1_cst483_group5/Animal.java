@@ -29,6 +29,7 @@ public class Animal {
     @SerializedName("color")
     String mColor;
 
+    //ToDo: Break after first space
     @SerializedName("name")
     String mName;
 

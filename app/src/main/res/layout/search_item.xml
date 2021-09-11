@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayoutCompat"
     android:layout_width="match_parent"
+    android:background="#C0A377"
     android:layout_height="wrap_content">
 
     <TextView
@@ -41,6 +42,7 @@
         android:text="Type Placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvGenderSearch"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -49,12 +51,16 @@
         android:id="@+id/tvGenderSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:text="Gender Placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivDeleteFav"
+        app:layout_constraintStart_toEndOf="@+id/tvTypeSearch"
         app:layout_constraintTop_toBottomOf="@+id/tvNameSearch"
         app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="242dp" />
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/ivInfoSearch"

@@ -1,6 +1,9 @@
 package com.example.project1_cst483_group5;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -25,6 +29,7 @@ public class Search extends AppCompatActivity {
 
     public static final String ACTIVITY_LABEL_AUTH = "SEARCH_COM_PROJ1_G5_AUTH";
     public Button favBtn;
+    //TODO: Return this an a thing later??
     List<Animal> animalList;
 
     @Override
@@ -43,7 +48,12 @@ public class Search extends AppCompatActivity {
 
         });
 
+        //Default list an animals to populate the page first
         getBasicAnimals(auth);
+
+
+
+
     }
 
     public static Intent getIntent(Context context, String auth) {
@@ -66,9 +76,21 @@ public class Search extends AppCompatActivity {
         Log.d("API TEST", auth);
         Log.d("API TEST", "helloooo");
 
-//
-      // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
 
+        //ToDo: Maybe move out of this method?
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
+
+
+
+
+
+        // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
       Call<AnimalResults> basicAnimalCall = PetFinderClient.getInstance().petFinderApi.getBasicAnimalList(" Bearer " + auth);
         Log.d("API TEST", "hello");
             basicAnimalCall.enqueue(new Callback <AnimalResults>(){
@@ -82,9 +104,12 @@ public class Search extends AppCompatActivity {
 
                     AnimalResults animalResults = response.body();
                     animalList =  animalResults.animals;
+                    AnimalAdapter adapter = new AnimalAdapter(generateAnimalList());
+
+                    recyclerView.setAdapter(adapter);
+
                     Animal tempAnimal;
                     tempAnimal = animalList.get(0);
-
                     Log.d("API TEST",""+ tempAnimal.toString());
 
                 }
@@ -99,7 +124,20 @@ public class Search extends AppCompatActivity {
 
         }
 
+    private List<AnimalViewModel> generateAnimalList() {
+        List<AnimalViewModel> animalViewModelList = new ArrayList<>();
+        Log.d("API TEST", "ANIMAL LIST");
+
+        for( Animal animal: animalList) {
+            //simpleViewModelList.add(new AnimalViewModel(String.format(Locale.US, "This is item %d", i)));
+            animalViewModelList.add(new AnimalViewModel(animal.getmName(), animal.getmType(), animal.getmAge(), animal.getmGender()));
+        }
+
+        return animalViewModelList;
+    }
 }
+
+
         //curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1cEliOUxHMFA2eWNmRTdlQVBWOTNoc3JTR0ZGQnZ3ZWp0MHNlSFJPdUxMWmVrdjVnUyIsImp0aSI6ImIyMjNkMzgwZDZmM2JmOGFkMWMwMTdkYTZiYThhNTE0YjQ2N2FlOTBhZmNiOWU3YTMxODc2ZThjMDAyNWFkNWVjNWRjMzU0ZmQ1Nzg0OGM4IiwiaWF0IjoxNjMxMjA3MDQ3LCJuYmYiOjE2MzEyMDcwNDcsImV4cCI6MTYzMTIxMDY0Nywic3ViIjoiIiwic2NvcGVzIjpbXX0.M9T3vjzEh-rvyzVx5KL4YR7uY_cL7v0K7CN6lUwEFV5YkD-psS6_L9dgNUEpA1JpSt_wKgKOgdv7Be7ouh5cumgB4vfUcoMsBJy0vDUYlFs7AHVwzT8NmLhgNdQQzzF0MA8ggBCypDaRAG8Z98GfZPeO73ivIgHh_Y2Ctv-2pLO5Oq6oKvB7T82H09I-55Ga_DBxUDW8Qe3cBTUjYgyGotuKyV2osme0RBSBORoo8CCE59e3LQ6oMuk9Tau3Tv5q8WSZ6XWzYMmHfTd8v2K_0OZi7SxgEM_xZm1C8te4d75hST689IcFDskE9jLK7QVhlaik7r0fYti7u-LYuWseWQ " GET https://api.petfinder.com/v2/animals
 
   //  Gson gson = new GsonBuilder().serializeNulls().create();

@@ -2,38 +2,41 @@ package com.example.project1_cst483_group5;
 
 import androidx.room.ColumnInfo;
 
-public class Animal {
-    //ToDO: Fill out with params we want from api
+import com.google.gson.annotations.SerializedName;
 
-    @ColumnInfo(name = "id")
+import java.util.List;
+
+public class Animal {
+
+    @SerializedName("id")
     Integer mID;
 
-    @ColumnInfo(name = "type")
+    @SerializedName("type")
     String mType;
 
-    @ColumnInfo(name = "breed")
+    @SerializedName("breed")
     String mBreed;
 
-    @ColumnInfo(name = "size")
+    @SerializedName("size")
     String mSize;
 
-    @ColumnInfo(name = "gender")
+    @SerializedName("gender")
     String mGender;
 
-    @ColumnInfo(name = "age")
+    @SerializedName("age")
     String mAge;
 
-    @ColumnInfo(name = "color")
+    @SerializedName("color")
     String mColor;
 
-    @ColumnInfo(name = "name")
+    @SerializedName("name")
     String mName;
 
-    @ColumnInfo(name = "description")
+    @SerializedName("description")
     String mDescription;
 
-    @ColumnInfo(name = "photos")
-    String mPhoto;
+    @SerializedName("photos")
+    List<Photos> mPhoto;
 
     public String getmType() {
         return mType;
@@ -99,11 +102,11 @@ public class Animal {
         this.mDescription = mDescription;
     }
 
-    public String getmPhoto() {
+    public List<Photos> getmPhoto() {
         return mPhoto;
     }
 
-    public void setmPhoto(String mPhoto) {
+    public void setmPhoto(List<Photos> mPhoto) {
         this.mPhoto = mPhoto;
     }
 

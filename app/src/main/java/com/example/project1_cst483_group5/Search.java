@@ -66,26 +66,10 @@ public class Search extends AppCompatActivity {
         Log.d("API TEST", auth);
         Log.d("API TEST", "helloooo");
 
-        Gson gson = new GsonBuilder().serializeNulls().create();
+//
+      // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.petfinder.com/v2/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
-
-       Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
-
-      // Call<List<Animal>> basicAnimalCall = PetFinderClient.getInstance().petFinderApi.getBasicAnimalList("Authorization: Bearer " + auth);
+      Call<AnimalResults> basicAnimalCall = PetFinderClient.getInstance().petFinderApi.getBasicAnimalList(" Bearer " + auth);
         Log.d("API TEST", "hello");
             basicAnimalCall.enqueue(new Callback <AnimalResults>(){
                 @Override
@@ -96,30 +80,20 @@ public class Search extends AppCompatActivity {
                         return;
                     }
 
-//                    try {
-//
-//                        JSONObject json = new JSONObject(String.valueOf(response.body()));
-//                        JSONArray array = json.getJSONArray("GetCitiesResult");
-//                        for (int i = 0; i < array.length(); i++) {
-//                            list.add(array.getString(i));
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
                     AnimalResults animalResults = response.body();
-                    //animalList = (List<Animal>) animalResults;
-//
-                    Animal tempAnimal = new Animal();
-                   // tempAnimal = animalResults.animals.get(0);
+                    animalList =  animalResults.animals;
+                    Animal tempAnimal;
+                    tempAnimal = animalList.get(0);
 
-                  //  Log.d("API TEST",""+ tempAnimal.toString());
-                    Log.d("API TEST",""+ animalResults.animals.get(0).toString());
+                    Log.d("API TEST",""+ tempAnimal.toString());
 
                 }
 
                 @Override
                 public void onFailure(Call<AnimalResults> call, Throwable t) {
                     Log.d("API TEST", "hello failure");
+                    Log.d("API TEST", t.getMessage());
+
                 }
             });
 
@@ -127,3 +101,20 @@ public class Search extends AppCompatActivity {
 
 }
         //curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1cEliOUxHMFA2eWNmRTdlQVBWOTNoc3JTR0ZGQnZ3ZWp0MHNlSFJPdUxMWmVrdjVnUyIsImp0aSI6ImIyMjNkMzgwZDZmM2JmOGFkMWMwMTdkYTZiYThhNTE0YjQ2N2FlOTBhZmNiOWU3YTMxODc2ZThjMDAyNWFkNWVjNWRjMzU0ZmQ1Nzg0OGM4IiwiaWF0IjoxNjMxMjA3MDQ3LCJuYmYiOjE2MzEyMDcwNDcsImV4cCI6MTYzMTIxMDY0Nywic3ViIjoiIiwic2NvcGVzIjpbXX0.M9T3vjzEh-rvyzVx5KL4YR7uY_cL7v0K7CN6lUwEFV5YkD-psS6_L9dgNUEpA1JpSt_wKgKOgdv7Be7ouh5cumgB4vfUcoMsBJy0vDUYlFs7AHVwzT8NmLhgNdQQzzF0MA8ggBCypDaRAG8Z98GfZPeO73ivIgHh_Y2Ctv-2pLO5Oq6oKvB7T82H09I-55Ga_DBxUDW8Qe3cBTUjYgyGotuKyV2osme0RBSBORoo8CCE59e3LQ6oMuk9Tau3Tv5q8WSZ6XWzYMmHfTd8v2K_0OZi7SxgEM_xZm1C8te4d75hST689IcFDskE9jLK7QVhlaik7r0fYti7u-LYuWseWQ " GET https://api.petfinder.com/v2/animals
+
+  //  Gson gson = new GsonBuilder().serializeNulls().create();
+//
+//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .addInterceptor(interceptor)
+//                .build();
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://api.petfinder.com/v2/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(client)
+//                .build();
+//
+//        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);

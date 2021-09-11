@@ -2,10 +2,12 @@ package com.example.project1_cst483_group5;
 
 import androidx.room.ColumnInfo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class AnimalResults {
-    @ColumnInfo(name = "animals")
+    @SerializedName("animals")
     List<Animal> animals;
 
     public AnimalResults(List<Animal> animals) {

@@ -10,7 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,8 +33,16 @@ public class Search extends AppCompatActivity {
 
     public static final String ACTIVITY_LABEL_AUTH = "SEARCH_COM_PROJ1_G5_AUTH";
     public Button favBtn;
+    public Button searchBtn;
+    public Spinner typeSpinner;
+    public Spinner ageSpinner;
+    public Spinner genderSpinner;
+    public ImageView favAdd;
+
+
     //TODO: Return this an a thing later??
     List<Animal> animalList;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +52,38 @@ public class Search extends AppCompatActivity {
         String auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
 
         favBtn = findViewById(R.id.btnFavSearchPage);
+        searchBtn = findViewById(R.id.btnSearch);
+
+        typeSpinner = findViewById(R.id.spType);
+        ageSpinner = findViewById(R.id.spAge);
+        genderSpinner = findViewById(R.id.spGender);
+
+        populateSpinners();
+
+        recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
+
+        //Default list an animals to populate the page first
+        getBasicAnimals(auth);
+
+//        favAdd = findViewById(R.id.ivFav);
+//        favEvent(this);
+
+
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFilteredAnimals(auth);
+            }
+        });
+
+
         favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,15 +91,25 @@ public class Search extends AppCompatActivity {
             }
 
         });
-
-        //Default list an animals to populate the page first
-        getBasicAnimals(auth);
+        
+        
+//        favAdd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(Search.this, "CLICK ON", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
 
 
     }
 
+    public void favEvent(Context context)
+    {
+        Log.d("API TEST", "In FAV EVENT");
+        Toast.makeText(Search.this, "CLICK ON", Toast.LENGTH_SHORT).show();
+    }
     public static Intent getIntent(Context context, String auth) {
         Intent intent = new Intent(context,Search.class);
 
@@ -78,17 +132,10 @@ public class Search extends AppCompatActivity {
 
 
         //ToDo: Maybe move out of this method?
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
-
-
-
-
-
+//        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
 
         // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
       Call<AnimalResults> basicAnimalCall = PetFinderClient.getInstance().petFinderApi.getBasicAnimalList(" Bearer " + auth);
@@ -124,6 +171,51 @@ public class Search extends AppCompatActivity {
 
         }
 
+    public void getFilteredAnimals(String auth) {
+        Log.d("API TEST", auth);
+        Log.d("API TEST", "In FILTERED ANIMALs");
+
+
+        //ToDo: Maybe move out of this method?
+//        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+
+        // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
+        Call<AnimalResults> filteredAnimalCall = PetFinderClient.getInstance().petFinderApi.getFilteredAnimalList(" Bearer " + auth,"Female","Cat",null);
+        Log.d("API TEST", "hello CALL");
+        filteredAnimalCall.enqueue(new Callback <AnimalResults>(){
+            @Override
+            public void onResponse(Call<AnimalResults> call, Response<AnimalResults> response) {
+                Log.d("API TEST", "inside FILTERED enqueue");
+                if (!response.isSuccessful()) {
+                    Log.d("API TEST","Code: " + response.code());
+                    return;
+                }
+
+                AnimalResults animalResults = response.body();
+                animalList =  animalResults.animals;
+                AnimalAdapter adapter = new AnimalAdapter(generateAnimalList());
+
+                recyclerView.setAdapter(adapter);
+
+                Animal tempAnimal;
+                tempAnimal = animalList.get(0);
+                Log.d("API TEST",""+ tempAnimal.toString());
+
+            }
+
+            @Override
+            public void onFailure(Call<AnimalResults> call, Throwable t) {
+                Log.d("API TEST", "hello failure");
+                Log.d("API TEST", t.getMessage());
+
+            }
+        });
+
+    }
+
     private List<AnimalViewModel> generateAnimalList() {
         List<AnimalViewModel> animalViewModelList = new ArrayList<>();
         Log.d("API TEST", "ANIMAL LIST");
@@ -135,6 +227,32 @@ public class Search extends AppCompatActivity {
 
         return animalViewModelList;
     }
+
+
+    private void populateSpinners(){
+        ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.type_array, android.R.layout.simple_spinner_item);
+        
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        
+        typeSpinner.setAdapter(typeAdapter);
+
+        ArrayAdapter<CharSequence> ageAdapter = ArrayAdapter.createFromResource(this,
+                R.array.age_array, android.R.layout.simple_spinner_item);
+
+        ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ageSpinner.setAdapter(ageAdapter);
+
+        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this,
+                R.array.gender_array, android.R.layout.simple_spinner_item);
+
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        genderSpinner.setAdapter(genderAdapter);
+
+    }
+
 }
 
 

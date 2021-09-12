@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayoutCompat"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="#C0A377"
-    android:layout_height="wrap_content">
+    android:onClick="clickenent">
 
     <TextView
         android:id="@+id/tvAgeSearch"
@@ -56,20 +57,21 @@
         android:layout_marginBottom="8dp"
         android:text="Gender Placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivDeleteFav"
+        app:layout_constraintEnd_toStartOf="@+id/ivFav"
         app:layout_constraintStart_toEndOf="@+id/tvTypeSearch"
         app:layout_constraintTop_toBottomOf="@+id/tvNameSearch"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/ivInfoSearch"
+        android:id="@+id/ivInfo"
         android:layout_width="34dp"
         android:layout_height="33dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="16dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvNameSearch"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,13 +79,15 @@
         app:srcCompat="@drawable/ic_info" />
 
     <ImageView
-        android:id="@+id/ivDeleteFav"
+        android:id="@+id/ivFav"
         android:layout_width="31dp"
         android:layout_height="32dp"
         android:layout_marginStart="23dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:onClick="favEvent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvAgeSearch"

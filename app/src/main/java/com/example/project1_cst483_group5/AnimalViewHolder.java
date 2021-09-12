@@ -1,6 +1,7 @@
 package com.example.project1_cst483_group5;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ public class AnimalViewHolder extends RecyclerView.ViewHolder {
     TextView type;
     TextView age;
     TextView gender;
+    ImageView favBtn;
+    ImageView infoBtnSearch;
 
     public AnimalViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -20,6 +23,9 @@ public class AnimalViewHolder extends RecyclerView.ViewHolder {
         type = itemView.findViewById(R.id.tvTypeSearch);
         age = itemView.findViewById(R.id.tvAgeSearch);
         gender = itemView.findViewById(R.id.tvGenderSearch);
+
+       favBtn = itemView.findViewById(R.id.ivFav);
+       infoBtnSearch = itemView.findViewById(R.id.ivInfo);
     }
 
     public void bindData(final AnimalViewModel viewModel) {

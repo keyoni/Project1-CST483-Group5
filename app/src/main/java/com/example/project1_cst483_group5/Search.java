@@ -2,6 +2,7 @@ package com.example.project1_cst483_group5;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.project1_cst483_group5.db.PetViewModel;
+import com.example.project1_cst483_group5.db.UserViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -38,6 +41,7 @@ public class Search extends AppCompatActivity {
     public Spinner ageSpinner;
     public Spinner genderSpinner;
     public ImageView favAdd;
+    public PetViewModel petVM;
 
 
     //TODO: Return this an a thing later??
@@ -63,6 +67,8 @@ public class Search extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        petVM = new ViewModelProvider(this).get(PetViewModel.class);
 
 
 
@@ -149,11 +155,13 @@ public class Search extends AppCompatActivity {
                         return;
                     }
 
+
                     AnimalResults animalResults = response.body();
                     animalList =  animalResults.animals;
-                    AnimalAdapter adapter = new AnimalAdapter(generateAnimalList());
+                    //AnimalAdapter adapter = new AnimalAdapter(generateAnimalList());
+                    AnimalAdapter favAnimaladapter = new AnimalAdapter(generateAnimalList(),petVM);
 
-                    recyclerView.setAdapter(adapter);
+                    recyclerView.setAdapter(favAnimaladapter);
 
                     Animal tempAnimal;
                     tempAnimal = animalList.get(0);
@@ -196,7 +204,7 @@ public class Search extends AppCompatActivity {
 
                 AnimalResults animalResults = response.body();
                 animalList =  animalResults.animals;
-                AnimalAdapter adapter = new AnimalAdapter(generateAnimalList());
+                AnimalAdapter adapter = new AnimalAdapter(generateAnimalList(), petVM);
 
                 recyclerView.setAdapter(adapter);
 
@@ -222,7 +230,7 @@ public class Search extends AppCompatActivity {
 
         for( Animal animal: animalList) {
             //simpleViewModelList.add(new AnimalViewModel(String.format(Locale.US, "This is item %d", i)));
-            animalViewModelList.add(new AnimalViewModel(animal.getmName(), animal.getmType(), animal.getmAge(), animal.getmGender()));
+            animalViewModelList.add(new AnimalViewModel(animal.getmID(), animal.getmName(), animal.getmType(), animal.getmAge(), animal.getmGender()));
         }
 
         return animalViewModelList;

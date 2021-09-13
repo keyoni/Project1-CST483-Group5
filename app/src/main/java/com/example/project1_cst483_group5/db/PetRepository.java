@@ -10,7 +10,7 @@ public class PetRepository {
 
     private PetDao mPetDao;
     private LiveData<List<Pet>> mAllPets;
-    private LiveData<List<Pet>> mAllFavorites;
+    private List<Pet> mAllFavorites;
 
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
@@ -38,8 +38,11 @@ public class PetRepository {
         });
     }
 
-    LiveData<List<Pet>> getAllFavorites(Integer mUserID){
-            mAllFavorites = mPetDao.getPetsByUserID(mUserID);
+    List<Pet> getAllFavorites(Integer mUserID){
+            AppDatabase.databaseWriteExecutor.execute(() -> {
+                mAllFavorites = mPetDao.getPetsByUserID(mUserID);
+            });
+
             return mAllFavorites;
     }
 

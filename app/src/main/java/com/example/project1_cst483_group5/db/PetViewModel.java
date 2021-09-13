@@ -6,22 +6,26 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.util.List;
+
 
 public class PetViewModel extends AndroidViewModel {
 
     private PetRepository petRepo;
 
+
     public PetViewModel(@NonNull Application application) {
         super(application);
 
         petRepo = new PetRepository(application);
+
     }
 
         public void insert(Pet pet) {
             petRepo.insert(pet);
     }
 
-
+    public List<Pet> getPetsByUserID(Integer mUserID){ return petRepo.getAllFavorites(mUserID); }
 
 
 

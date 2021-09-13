@@ -7,7 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.project1_cst483_group5.db.Pet;
+import com.example.project1_cst483_group5.db.PetViewModel;
+import com.example.project1_cst483_group5.db.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +20,12 @@ import java.util.List;
 public class AnimalAdapter extends RecyclerView.Adapter {
 
     private List<AnimalViewModel> animalViewModels = new ArrayList<>();
+    private PetViewModel petVM;
 
-    public AnimalAdapter(List<AnimalViewModel> animalViewModels) {
+
+    public AnimalAdapter(List<AnimalViewModel> animalViewModels, PetViewModel petViewModel) {
         this.animalViewModels = animalViewModels;
+        this.petVM = petViewModel;
     }
 
     @NonNull
@@ -33,7 +41,13 @@ public class AnimalAdapter extends RecyclerView.Adapter {
         ((AnimalViewHolder) holder).favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "CLICK ON", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Favorited", Toast.LENGTH_SHORT).show();
+                Pet tempPet = new Pet(1, ((AnimalViewHolder) holder).name.getText().toString(),
+                        ((AnimalViewHolder) holder).type.getText().toString(),
+                        ((AnimalViewHolder) holder).gender.getText().toString(),
+                        Integer.parseInt(((AnimalViewHolder) holder).id.getText().toString()));
+
+                petVM.insert(tempPet);
             }
         });
 

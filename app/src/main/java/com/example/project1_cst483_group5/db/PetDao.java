@@ -30,8 +30,8 @@ public interface PetDao {
     LiveData<List<Pet>> getPetsByIDs(); //livedata to update changed data that is being observed
 
     @Query ("SELECT * FROM pet_table WHERE userID = :mUserID")
-    LiveData<List<Pet>> getPetsByUserID(Integer mUserID);
-
+    List<Pet> getPetsByUserID(Integer mUserID);
+    //TODO:update to live data
     //* these querries are only needed in the user_table
 //    @Query ("SELECT * FROM pet_table WHERE type = :mType")
 //    LiveData<List<Pet>> getPetsByType(String mType);

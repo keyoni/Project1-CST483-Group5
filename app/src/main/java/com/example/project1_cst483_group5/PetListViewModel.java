@@ -1,23 +1,31 @@
 package com.example.project1_cst483_group5;
 
-import android.view.View;
+import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-public class AnimalViewModel {
+import com.example.project1_cst483_group5.db.Pet;
+import com.example.project1_cst483_group5.db.PetRepository;
+
+import java.util.List;
+
+public class PetListViewModel {
 
 
-        private String name;
-        private Integer id;
-        private String type;
-        private String age;
-        private String gender;
+    private String name;
+    private Integer id;
+    private String type;
+    private String gender;
 
-    public AnimalViewModel(Integer id, String name, String type, String age, String gender) {
+
+    public PetListViewModel( Integer id, String name, String type, String gender) {
+
+
+
         this.id = id;
         this.name = name;
         this.type = type;
-        this.age = age;
+
         this.gender = gender;
     }
 
@@ -38,14 +46,6 @@ public class AnimalViewModel {
         this.type = type;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -57,4 +57,7 @@ public class AnimalViewModel {
     public Integer getId() { return id; }
 
     public void setId(Integer id) { this.id = id;  }
+
+
+
 }

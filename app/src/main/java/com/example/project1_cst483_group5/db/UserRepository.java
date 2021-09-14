@@ -11,7 +11,7 @@ public class UserRepository {
     private UserDao mUserDao;
     private String name;
     private int userCount;
-    private User currentUser;
+    private List<User> currentUser;
 
     public UserRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
@@ -39,10 +39,10 @@ public class UserRepository {
         return userCount;
     }
 
-    User getUserByUsernameAndPassword(String mUsername, String mPassword) {
+    List<User> getUserByUsernameAndPassword(String mUsername, String mPassword) {
 
         AppDatabase.databaseWriteExecutor.execute(() -> {
-           currentUser = mUserDao.getUsersByUsernameAndPassword(mUsername,mPassword).get(0);
+           currentUser = mUserDao.getUsersByUsernameAndPassword(mUsername,mPassword);
         });
         return currentUser;
     }

@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.util.List;
+
 
 public class UserViewModel extends AndroidViewModel {
 
@@ -29,7 +31,7 @@ public class UserViewModel extends AndroidViewModel {
          return userRepo.getUserCount();
      }
 
-     public User getUsersByUsernameAndPassword(String mUsername, String mPassword) {
+     public List<User> getUsersByUsernameAndPassword(String mUsername, String mPassword) {
         return userRepo.getUserByUsernameAndPassword(mUsername,mPassword);
      }
 }

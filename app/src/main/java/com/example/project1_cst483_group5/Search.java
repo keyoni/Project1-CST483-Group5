@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -42,7 +43,9 @@ public class Search extends AppCompatActivity {
     public Spinner genderSpinner;
     public ImageView favAdd;
     public PetViewModel petVM;
-
+    private String typeChoice;
+    private String ageChoice;
+    private String genderChoice;
 
     //TODO: Return this an a thing later??
     List<Animal> animalList;
@@ -63,6 +66,40 @@ public class Search extends AppCompatActivity {
         genderSpinner = findViewById(R.id.spGender);
 
         populateSpinners();
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                typeChoice = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ageChoice = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                genderChoice = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
         recyclerView.setHasFixedSize(true);
@@ -192,8 +229,17 @@ public class Search extends AppCompatActivity {
 //
 
         // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
+        if(genderChoice.equals("Any")) {
+            genderChoice = null;
+        }
+        if(typeChoice.equals("Any")) {
+            typeChoice = null;
+        }
+        if(ageChoice.equals("Any")) {
+            ageChoice = null;
+        }
 
-        Call<AnimalResults> filteredAnimalCall = PetFinderClient.getInstance().petFinderApi.getFilteredAnimalList(" Bearer " + auth,"Female","Cat",null);
+        Call<AnimalResults> filteredAnimalCall = PetFinderClient.getInstance().petFinderApi.getFilteredAnimalList(" Bearer " + auth,genderChoice,typeChoice,ageChoice);
         Log.d("API TEST", "hello CALL");
         filteredAnimalCall.enqueue(new Callback <AnimalResults>(){
             @Override

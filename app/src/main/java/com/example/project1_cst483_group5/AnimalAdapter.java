@@ -57,6 +57,7 @@ public class AnimalAdapter extends RecyclerView.Adapter {
 //                Intent intent = Favorites.getIntent(getApplicationContext(),auth);
 //                intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH",auth);
 //                startActivity(intent);
+
                 Toast.makeText(view.getContext(), "CLICK ON INFO Model Page", Toast.LENGTH_SHORT).show();
             }
         });

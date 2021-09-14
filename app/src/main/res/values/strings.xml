@@ -9,4 +9,24 @@
     <string name="logout">Logout</string>
     <string name="favorite_pets">Favorite Pets!</string>
     <string name="favorites">Favorites</string>
+    <string-array name="type_array">
+        <item>Any</item>
+        <item>Dog</item>
+        <item>Cat</item>
+        <item>Rabbit</item>
+        <item>Horse</item>
+        <item>Bird</item>
+    </string-array>
+    <string-array name="age_array">
+        <item>Any</item>
+        <item>Baby</item>
+        <item>Young</item>
+        <item>Adult</item>
+        <item>Senior</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>Any</item>
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
 </resources>

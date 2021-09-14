@@ -163,6 +163,7 @@ public class Search extends AppCompatActivity {
 
                     recyclerView.setAdapter(favAnimaladapter);
 
+
                     Animal tempAnimal;
                     tempAnimal = animalList.get(0);
                     Log.d("API TEST",""+ tempAnimal.toString());
@@ -191,6 +192,7 @@ public class Search extends AppCompatActivity {
 //
 
         // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
+
         Call<AnimalResults> filteredAnimalCall = PetFinderClient.getInstance().petFinderApi.getFilteredAnimalList(" Bearer " + auth,"Female","Cat",null);
         Log.d("API TEST", "hello CALL");
         filteredAnimalCall.enqueue(new Callback <AnimalResults>(){

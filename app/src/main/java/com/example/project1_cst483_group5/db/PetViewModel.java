@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PetViewModel extends AndroidViewModel {
 
-    private PetRepository petRepo;
+    private final PetRepository petRepo;
 
 
     public PetViewModel(@NonNull Application application) {
@@ -21,12 +21,13 @@ public class PetViewModel extends AndroidViewModel {
 
     }
 
-        public void insert(Pet pet) {
-            petRepo.insert(pet);
+    public void insert(Pet pet) {
+        petRepo.insert(pet);
     }
 
-    public List<Pet> getPetsByUserID(Integer mUserID){ return petRepo.getAllFavorites(mUserID); }
-
+    public List<Pet> getPetsByUserID(Integer mUserID) {
+        return petRepo.getAllFavorites(mUserID);
+    }
 
 
 }

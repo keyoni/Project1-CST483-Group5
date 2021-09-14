@@ -23,6 +23,7 @@ import java.util.List;
 public class Favorites extends AppCompatActivity {
 
     public static final String ACTIVITY_LABEL_AUTH = "FAVORITES_COM_PROJ1_G5_AUTH";
+    //public static final String ACTIVITY_LABEL_ID = "FAVORITES_COM_PROJ1_G5_ID";
     public Button searchBtn;
     public PetViewModel petVM;
     RecyclerView recyclerView;
@@ -42,6 +43,7 @@ public class Favorites extends AppCompatActivity {
         petVM = new ViewModelProvider(this).get(PetViewModel.class);
 
         String auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
+        //Integer userId = (Integer) getIntent().getIntExtra(ACTIVITY_LABEL_ID);
 
         searchBtn = findViewById(R.id.btnSearchFavPage);
         searchBtn.setOnClickListener(new View.OnClickListener() {

@@ -89,48 +89,49 @@ public class MainActivity extends AppCompatActivity {
         pass = password.getText().toString();
         List<User> userLogin = userVM.getUsersByUsernameAndPassword(user, pass);
         if (userLogin != null) {
-            login();
+            login(userLogin.get(0).getMUserID());
         } else {
             Toast.makeText(this, "Bad username/password", Toast.LENGTH_LONG).show();
         }
     }
 
         private void getAuth() {
-//        Log.d("API TEST", "helloooo");
-//
-//        AuthRequest authRequest = new AuthRequest("client_credentials",
-//                "upIb9LG0P6ycfE7eAPV93hsrSGFFBvwejt0seHROuLLZekv5gS",
-//                "PNUfd2VyDeiulTuuwpOAv0pvYo3fO8LS1e9eHHfu");
-//
-//        Call<AuthApi> authCall = PetFinderClient.getInstance().getPetFinderApi().Auth(authRequest);
-//
-//
-//        authCall.enqueue(new Callback<AuthApi>() {
-//            @Override
-//            public void onResponse(Call<AuthApi> call, Response<AuthApi> response) {
-//
-//                if (!response.isSuccessful()) {
-//                    Log.d("API TEST","Code: " + response.code());
-//                    return;
-//                }
-//                authorization = response.body();
-//
-//                Log.d("API TEST", authorization.getAccess_token());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<AuthApi> call, Throwable t) {
-//
-//            }
-//        });
-//
+        Log.d("API TEST", "helloooo");
+
+        AuthRequest authRequest = new AuthRequest("client_credentials",
+                "upIb9LG0P6ycfE7eAPV93hsrSGFFBvwejt0seHROuLLZekv5gS",
+                "PNUfd2VyDeiulTuuwpOAv0pvYo3fO8LS1e9eHHfu");
+
+        Call<AuthApi> authCall = PetFinderClient.getInstance().getPetFinderApi().Auth(authRequest);
+
+
+        authCall.enqueue(new Callback<AuthApi>() {
+            @Override
+            public void onResponse(Call<AuthApi> call, Response<AuthApi> response) {
+
+                if (!response.isSuccessful()) {
+                    Log.d("API TEST","Code: " + response.code());
+                    return;
+                }
+                authorization = response.body();
+
+                Log.d("API TEST", authorization.getAccess_token());
+            }
+
+            @Override
+            public void onFailure(Call<AuthApi> call, Throwable t) {
+
+            }
+        });
+
    }
-    public void login() {
-        //Intent intent = Favorites.getIntent(getApplicationContext(),authorization.getAccess_token());
-        //intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
-//        startActivity(intent);
-        Intent i = new Intent(getApplicationContext(), Favorites.class);
-        startActivity(i);
+    public void login(Integer userId) {
+        Intent intent = Favorites.getIntent(getApplicationContext(),authorization.getAccess_token());
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
+        //intent.putExtra("FAVORITES_COM_PROJ1_G5_ID",userId);
+        startActivity(intent);
+//        Intent i = new Intent(getApplicationContext(), Favorites.class);
+//        startActivity(i);
 
 
     }

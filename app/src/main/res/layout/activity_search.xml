@@ -36,8 +36,8 @@
 
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rvSearch"
-          android:layout_width="match_parent"
-          android:layout_height="500px"
+          android:layout_width="412dp"
+          android:layout_height="394dp"
           app:layout_constraintBottom_toTopOf="@+id/btnFavSearchPage"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0.0"
@@ -49,11 +49,10 @@
           android:id="@+id/btnYipYip"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="172dp"
           android:text="@string/yip_yip"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@+id/btnFavSearchPage"
-          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintHorizontal_bias="1.0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/rvSearch" />
 
@@ -61,7 +60,6 @@
           android:id="@+id/btnLogoutSearchPage"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="172dp"
           android:text="@string/logout"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
@@ -73,13 +71,12 @@
           android:id="@+id/btnFavSearchPage"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="172dp"
           android:text="@string/favorites"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@+id/btnLogoutSearchPage"
           app:layout_constraintHorizontal_bias="0.5"
           app:layout_constraintStart_toEndOf="@+id/btnYipYip"
-          app:layout_constraintTop_toBottomOf="@+id/rvSearch"/>
+          app:layout_constraintTop_toBottomOf="@+id/rvSearch" />
 
       <androidx.constraintlayout.widget.Guideline
           android:id="@+id/guideline4"
@@ -93,7 +90,6 @@
           android:layout_width="409dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="126dp"
-          android:layout_marginBottom="75dp"
           android:text="Search"
           app:layout_constraintBottom_toTopOf="@+id/rvSearch"
           app:layout_constraintEnd_toEndOf="parent"
@@ -112,16 +108,17 @@
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/tvFilterBy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Filter By:"
-        app:layout_constraintBottom_toTopOf="@+id/spAge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+      <TextView
+          android:id="@+id/tvFilterBy"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="24dp"
+          android:text="Filter By:"
+          app:layout_constraintBottom_toTopOf="@+id/spAge"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.498"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

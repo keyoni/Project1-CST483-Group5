@@ -34,11 +34,13 @@ public class MainActivity extends AppCompatActivity {
     public UserViewModel userVM;
     public Button loginBtn, createAccBtn;
     AuthApi authorization;
+    Integer userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userId = 0;
 
         userVM = new ViewModelProvider(this).get(UserViewModel.class);
         loginBtn = findViewById(R.id.btnLogin);
@@ -93,8 +95,10 @@ public class MainActivity extends AppCompatActivity {
         user = username.getText().toString();
         pass = password.getText().toString();
         List<User> userLogin = userVM.getUsersByUsernameAndPassword(user, pass);
+
         if (userLogin != null) {
-            login(userLogin.get(0).getMUserID());
+            userId = userLogin.get(0).getMUserID();
+            login();
         } else {
             Toast.makeText(this, "Bad username/password", Toast.LENGTH_LONG).show();
         }
@@ -130,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
    }
-    public void login(Integer userId) {
+    public void login() {
         Intent intent = Favorites.getIntent(getApplicationContext(),authorization.getAccess_token());
         intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
         intent.putExtra("FAVORITES_COM_PROJ1_G5_ID",userId);

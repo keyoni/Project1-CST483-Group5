@@ -52,6 +52,7 @@ public class Search extends AppCompatActivity {
     private String ageChoice;
     private String genderChoice;
     public Button yipYipBtn;
+    private  Button logoutBtn;
     private SingleAnimal  animalResult;
     private Animal randomAnimal;
 
@@ -66,6 +67,8 @@ public class Search extends AppCompatActivity {
 
         String auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
         userId = getIntent().getIntExtra(ACTIVITY_LABEL_ID,0);
+        petVM = new ViewModelProvider(this).get(PetViewModel.class);
+
 
 
         favBtn = findViewById(R.id.btnFavSearchPage);
@@ -118,7 +121,6 @@ public class Search extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        petVM = new ViewModelProvider(this).get(PetViewModel.class);
 
 
 
@@ -154,7 +156,16 @@ public class Search extends AppCompatActivity {
             }
 
         });
-        
+
+        logoutBtn = findViewById(R.id.btnLogoutSearchPage);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Search.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         
 //        favAdd.setOnClickListener(new View.OnClickListener() {
 //            @Override

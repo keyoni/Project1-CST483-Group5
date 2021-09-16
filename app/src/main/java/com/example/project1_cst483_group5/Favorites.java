@@ -26,10 +26,12 @@ public class Favorites extends AppCompatActivity {
     public static final String ACTIVITY_LABEL_ID = "FAVORITES_COM_PROJ1_G5_ID";
     public Button searchBtn;
     public Button refreshBtn;
+    public  Button logoutBtn;
     public PetViewModel petVM;
     RecyclerView recyclerView;
     public List<Pet> pets;
     private Integer userId;
+    private String auth;
 
 
 
@@ -44,7 +46,7 @@ public class Favorites extends AppCompatActivity {
 
         petVM = new ViewModelProvider(this).get(PetViewModel.class);
 
-        String auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
+        auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
         userId = getIntent().getIntExtra(ACTIVITY_LABEL_ID,0);
         //userId = 1;
 
@@ -69,17 +71,27 @@ public class Favorites extends AppCompatActivity {
 
         });
 
+        logoutBtn = findViewById(R.id.btnLogoutFavPage);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Favorites.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
     }
 
     private List<PetListViewModel> generateAnimalList() {
         List<PetListViewModel> petListViewModelList = new ArrayList<>();
-        Log.d("API TEST", "ANIMAL LIST");
+        Log.d("API TEST", "ANIMAL LIST" + userId);
 
         pets = petVM.getPetsByUserID(userId);
 
         //Toast.makeText(Favorites.this, pets.get(0).getMName() + " is here", Toast.LENGTH_SHORT).show();
-        if(pets == null){
+        if(pets == null || pets.isEmpty()){
             Toast.makeText(Favorites.this, "Search to add pets", Toast.LENGTH_SHORT).show();
 
         } else {
@@ -87,15 +99,15 @@ public class Favorites extends AppCompatActivity {
 
             for (Pet animal : pets) {
                 //simpleViewModelList.add(new AnimalViewModel(String.format(Locale.US, "This is item %d", i)));
-                petListViewModelList.add(new PetListViewModel(animal.getMPetID(),
+                petListViewModelList.add(new PetListViewModel(animal.getMID(),
                         animal.getMName(),
                         animal.getMType(),
                         animal.getMGender()));
             }
         }
 
-        PetListAdapter petAdapter = new PetListAdapter(petListViewModelList,petVM);
-        petAdapter.notifyDataSetChanged();
+        PetListAdapter petAdapter = new PetListAdapter(petListViewModelList,petVM,auth,Favorites.this);
+        //petAdapter.notifyDataSetChanged();
 
         recyclerView.setAdapter(petAdapter);
 

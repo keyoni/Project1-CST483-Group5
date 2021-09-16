@@ -53,7 +53,7 @@ public class Favorites extends AppCompatActivity {
             }
 
         });
-        logoutBtn = findViewById(R.id.btnLogoutSearchPage);
+        logoutBtn = findViewById(R.id.btnLogoutFavPage);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

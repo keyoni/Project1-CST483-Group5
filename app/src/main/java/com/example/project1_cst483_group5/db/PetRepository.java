@@ -38,6 +38,13 @@ public class PetRepository {
         });
     }
 
+    void deletePet(Integer mID) {
+            AppDatabase.databaseWriteExecutor.execute(() -> {
+                mPetDao.deletePet(mID);
+            });
+        }
+
+
     List<Pet> getAllFavorites(Integer mUserID){
             AppDatabase.databaseWriteExecutor.execute(() -> {
                 mAllFavorites = mPetDao.getPetsByUserID(mUserID);

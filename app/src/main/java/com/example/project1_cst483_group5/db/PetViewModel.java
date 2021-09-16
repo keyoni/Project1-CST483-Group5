@@ -29,5 +29,5 @@ public class PetViewModel extends AndroidViewModel {
         return petRepo.getAllFavorites(mUserID);
     }
 
-
+    public void deletePet(Integer mID) {  petRepo.deletePet(mID);}
 }

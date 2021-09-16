@@ -26,6 +26,9 @@ public interface PetDao {
     @Query("DELETE FROM pet_table") //not sure why this is an error
     void deleteAll();
 
+    @Query("DELETE FROM pet_table WHERE id = :mID") //not sure why this is an error
+    void deletePet(Integer mID);
+
     @Query("SELECT * FROM pet_table ORDER BY petID ASC")
     LiveData<List<Pet>> getPetsByIDs(); //livedata to update changed data that is being observed
 

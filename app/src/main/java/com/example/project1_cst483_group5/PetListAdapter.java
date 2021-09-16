@@ -54,9 +54,9 @@ public class PetListAdapter extends RecyclerView.Adapter {
         ((PetListViewHolder) holder).trashBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "deleted but not really" ,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(), "deleted but not really" + ((PetListViewHolder) holder).id.getText().toString() ,Toast.LENGTH_SHORT).show();
 
-               // petVM.delete(tempPet);
+                petVM.deletePet(parseInt(((PetListViewHolder) holder).id.getText().toString()));
             }
         });
 

@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     public UserViewModel userVM;
-    public Button loginBtn, createAccBtn;
+    public Button loginBtn, createAccBtn, logoutBtn;
     AuthApi authorization;
 
     @Override
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
         createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override

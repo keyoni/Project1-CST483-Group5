@@ -25,15 +25,15 @@ public class PetListViewHolder extends RecyclerView.ViewHolder {
 
     public PetListViewHolder(@NonNull View itemView) {
         super(itemView);
-        name = itemView.findViewById(R.id.tvNameSearch);
-        type = itemView.findViewById(R.id.tvTypeSearch);
+        name = itemView.findViewById(R.id.tvNameFav);
+        type = itemView.findViewById(R.id.tvTypeFav);
 
-        gender = itemView.findViewById(R.id.tvGenderSearch);
-        id = itemView.findViewById(R.id.tvIdSearch);
+        gender = itemView.findViewById(R.id.tvGenderFav);
+        id = itemView.findViewById(R.id.tvIdFav);
 
 
-        trashBtn = itemView.findViewById(R.id.ivFav);
-        favInfoBtn = itemView.findViewById(R.id.ivInfo);
+        trashBtn = itemView.findViewById(R.id.ivTrash);
+        favInfoBtn = itemView.findViewById(R.id.ivInfoFav);
     }
 
     public void bindData ( final PetListViewModel viewModel){

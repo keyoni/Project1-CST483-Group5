@@ -23,11 +23,13 @@ import java.util.List;
 public class Favorites extends AppCompatActivity {
 
     public static final String ACTIVITY_LABEL_AUTH = "FAVORITES_COM_PROJ1_G5_AUTH";
-    //public static final String ACTIVITY_LABEL_ID = "FAVORITES_COM_PROJ1_G5_ID";
+    public static final String ACTIVITY_LABEL_ID = "FAVORITES_COM_PROJ1_G5_ID";
     public Button searchBtn;
+    public Button refreshBtn;
     public PetViewModel petVM;
     RecyclerView recyclerView;
     public List<Pet> pets;
+    private Integer userId;
 
 
 
@@ -43,8 +45,21 @@ public class Favorites extends AppCompatActivity {
         petVM = new ViewModelProvider(this).get(PetViewModel.class);
 
         String auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
-        //Integer userId = (Integer) getIntent().getIntExtra(ACTIVITY_LABEL_ID);
+        userId = getIntent().getIntExtra(ACTIVITY_LABEL_ID,0);
+        //userId = 1;
 
+        refreshBtn = findViewById(R.id.btnRefresh);
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                generateAnimalList();
+//                PetListAdapter petAdapter = new PetListAdapter(generateAnimalList(),petVM);
+//
+//                recyclerView.setAdapter(petAdapter);
+
+            }
+        });
         searchBtn = findViewById(R.id.btnSearchFavPage);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,20 +69,21 @@ public class Favorites extends AppCompatActivity {
 
         });
 
-        PetListAdapter petAdapter = new PetListAdapter(generateAnimalList(),petVM);
 
-        recyclerView.setAdapter(petAdapter);
     }
 
     private List<PetListViewModel> generateAnimalList() {
         List<PetListViewModel> petListViewModelList = new ArrayList<>();
         Log.d("API TEST", "ANIMAL LIST");
 
-        pets = petVM.getPetsByUserID(1);
+        pets = petVM.getPetsByUserID(userId);
+
+        //Toast.makeText(Favorites.this, pets.get(0).getMName() + " is here", Toast.LENGTH_SHORT).show();
         if(pets == null){
             Toast.makeText(Favorites.this, "Search to add pets", Toast.LENGTH_SHORT).show();
 
         } else {
+            Toast.makeText(Favorites.this, pets.get(0).getMName() + " is here", Toast.LENGTH_SHORT).show();
 
             for (Pet animal : pets) {
                 //simpleViewModelList.add(new AnimalViewModel(String.format(Locale.US, "This is item %d", i)));
@@ -77,6 +93,11 @@ public class Favorites extends AppCompatActivity {
                         animal.getMGender()));
             }
         }
+
+        PetListAdapter petAdapter = new PetListAdapter(petListViewModelList,petVM);
+        petAdapter.notifyDataSetChanged();
+
+        recyclerView.setAdapter(petAdapter);
 
         return petListViewModelList;
     }
@@ -94,6 +115,7 @@ public class Favorites extends AppCompatActivity {
     public void toSearchPage(String auth) {
         Intent intent = Search.getIntent(getApplicationContext(),auth);
         intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",auth);
+        intent.putExtra("SEARCH_COM_PROJ1_G5_ID",userId);
         startActivity(intent);
     }
 

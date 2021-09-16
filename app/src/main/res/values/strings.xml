@@ -9,6 +9,7 @@
     <string name="logout">Logout</string>
     <string name="favorite_pets">Favorite Pets!</string>
     <string name="favorites">Favorites</string>
+    <string name="refresh">Refresh</string>
     <string-array name="type_array">
         <item>Any</item>
         <item>Dog</item>

@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PetFinderApi {
@@ -28,7 +29,9 @@ public interface PetFinderApi {
                                                @Query("gender") String gender,
                                                @Query("type") String type,
                                                @Query("age") String age);
-
+    @GET("animals/{id}")
+    Call<SingleAnimal> getAnimalById(@Header("Authorization") String auth,
+                               @Path("id") Integer id);
 
 
 

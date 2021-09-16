@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -36,6 +39,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Search extends AppCompatActivity {
 
     public static final String ACTIVITY_LABEL_AUTH = "SEARCH_COM_PROJ1_G5_AUTH";
+    public static final String ACTIVITY_LABEL_ID = "SEARCH_COM_PROJ1_G5_ID";
+    private Integer userId;
     public Button favBtn;
     public Button searchBtn;
     public Spinner typeSpinner;
@@ -46,6 +51,9 @@ public class Search extends AppCompatActivity {
     private String typeChoice;
     private String ageChoice;
     private String genderChoice;
+    public Button yipYipBtn;
+    private SingleAnimal  animalResult;
+    private Animal randomAnimal;
 
     //TODO: Return this an a thing later??
     List<Animal> animalList;
@@ -57,9 +65,12 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         String auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
+        userId = getIntent().getIntExtra(ACTIVITY_LABEL_ID,0);
+
 
         favBtn = findViewById(R.id.btnFavSearchPage);
         searchBtn = findViewById(R.id.btnSearch);
+        yipYipBtn = findViewById(R.id.btnYipYip);
 
         typeSpinner = findViewById(R.id.spType);
         ageSpinner = findViewById(R.id.spAge);
@@ -101,6 +112,8 @@ public class Search extends AppCompatActivity {
             }
         });
 
+
+
         recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -117,6 +130,13 @@ public class Search extends AppCompatActivity {
 //        favAdd = findViewById(R.id.ivFav);
 //        favEvent(this);
 
+        yipYipBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                yipYip(auth,userId, this);
+                //showAlertDialog(view.getContext(), this);
+            }
+        });
 
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +168,15 @@ public class Search extends AppCompatActivity {
 
     }
 
+//    private void showAlertDialog(Context context, View.OnClickListener onClickListener) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//        builder.setTitle("More Info!");
+//        builder.setMessage(randomAnimal.getmName());
+//        builder.show();
+//
+
+    //}
+
     public void favEvent(Context context)
     {
         Log.d("API TEST", "In FAV EVENT");
@@ -167,7 +196,82 @@ public class Search extends AppCompatActivity {
         intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH",auth);
         startActivity(intent);
     }
+public void yipYip(String auth, Integer userId, View.OnClickListener onClickListener) {
 
+
+    Gson gson = new GsonBuilder().serializeNulls().create();
+
+    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+    OkHttpClient client = new OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build();
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://api.petfinder.com/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build();
+
+    PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
+
+    Random randId = new Random();
+
+    // look away and send help
+    int upperbound = 42;
+    int base = 52992500;
+
+    int int_rand = randId.nextInt(upperbound);
+
+
+    //Call<Animal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  parseInt(((AnimalViewHolder) holder).id.getText().toString()));
+    Call<SingleAnimal> animalCall = petFinderApi.getAnimalById(" Bearer " + auth, base + int_rand);
+    animalCall.enqueue(new Callback<SingleAnimal>() {
+        @Override
+        public void onResponse(Call<SingleAnimal> call, Response<SingleAnimal> response) {
+            Log.d("API TEST", "inside SINGLE ANIMAL");
+            if (!response.isSuccessful()) {
+                Log.d("API TEST", "Code: " + response.code());
+                return;
+            }
+
+            animalResult = response.body();
+            randomAnimal = animalResult.getAnimal();
+            Log.d("API TEST", randomAnimal.getmName() + "");
+            AlertDialog.Builder builder = new AlertDialog.Builder(Search.this);
+            builder.setTitle("More Info!");
+            builder.setMessage(randomAnimal.getmName() +"");
+            builder.show();
+//
+//            SingleAnimal results = response.body();
+//            randomAnimal = results.getAnimal();
+//            if (randomAnimal == null) {
+//                Log.d("API TEST", "remember when APPA got kidnapped");
+//            } else {
+//
+//                Log.d("API TEST", "" +randomAnimal.getmName());
+//                //TODO: Maybe make a more info page from this only
+//                AlertDialog.Builder builder = new AlertDialog.Builder(Search.this);
+//                builder.setTitle("More Info!");
+//                builder.setMessage(randomAnimal.getmName());
+//                builder.show();
+//            }
+
+
+
+        }
+
+        @Override
+        public void onFailure(Call<SingleAnimal> call, Throwable t) {
+            Log.d("API TEST", "hello failure");
+            Log.d("API TEST", t.getMessage());
+
+        }
+    });
+
+
+}
 
     public void getBasicAnimals(String auth) {
         Log.d("API TEST", auth);
@@ -196,7 +300,7 @@ public class Search extends AppCompatActivity {
                     AnimalResults animalResults = response.body();
                     animalList =  animalResults.animals;
                     //AnimalAdapter adapter = new AnimalAdapter(generateAnimalList());
-                    AnimalAdapter favAnimaladapter = new AnimalAdapter(generateAnimalList(),petVM);
+                    AnimalAdapter favAnimaladapter = new AnimalAdapter(generateAnimalList(),petVM,userId,auth,Search.this);
 
                     recyclerView.setAdapter(favAnimaladapter);
 
@@ -252,7 +356,7 @@ public class Search extends AppCompatActivity {
 
                 AnimalResults animalResults = response.body();
                 animalList =  animalResults.animals;
-                AnimalAdapter adapter = new AnimalAdapter(generateAnimalList(), petVM);
+                AnimalAdapter adapter = new AnimalAdapter(generateAnimalList(), petVM,userId,auth, Search.this);
 
                 recyclerView.setAdapter(adapter);
 

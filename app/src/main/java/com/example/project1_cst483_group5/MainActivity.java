@@ -48,16 +48,17 @@ public class MainActivity extends AppCompatActivity {
         user = findViewById(R.id.etLoginEmail);
         password = findViewById(R.id.etLoginPassword);
 
-        if (userVM.getUserCount() == 0) {
-            createUsers();
-        }
+        //Log.d("API TEST", userVM.getUserCount() + ": number of Users");
+        int count = userVM.getUserCount();
+        createUsers(count);
+
 
         getAuth();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getUsersbyUsernameAndPassword(user, password);
+                getUsersByUsernameAndPassword(user, password);
 
             }
         });
@@ -76,14 +77,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void createUsers() {
+    public void createUsers(int count) {
+        Log.d("API TEST", count + " : number of Users");
+        if (count != 0) {
         for (int i = 0; i < 3; i++) {
             User tempUser = new User("User" + (i + 1),"user" + (i + 1), "password" + (i +1));
             userVM.insert(tempUser);
         }
+        }
+
     }
 
-    public void getUsersbyUsernameAndPassword(EditText username, EditText password) {
+    public void getUsersByUsernameAndPassword(EditText username, EditText password) {
         String user, pass;
         user = username.getText().toString();
         pass = password.getText().toString();
@@ -128,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     public void login(Integer userId) {
         Intent intent = Favorites.getIntent(getApplicationContext(),authorization.getAccess_token());
         intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
-        //intent.putExtra("FAVORITES_COM_PROJ1_G5_ID",userId);
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_ID",userId);
         startActivity(intent);
 //        Intent i = new Intent(getApplicationContext(), Favorites.class);
 //        startActivity(i);

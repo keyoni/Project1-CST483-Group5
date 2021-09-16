@@ -101,4 +101,16 @@ public class Pet {
     public void setMGender(@NonNull String mGender) {
         this.mGender = mGender;
     }
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "mPetID=" + mPetID +
+                ", mUserID=" + mUserID +
+                ", mName='" + mName + '\'' +
+                ", mType='" + mType + '\'' +
+                ", mGender='" + mGender + '\'' +
+                ", mID=" + mID +
+                '}';
+    }
 }

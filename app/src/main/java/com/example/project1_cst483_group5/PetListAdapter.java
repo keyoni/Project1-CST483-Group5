@@ -45,7 +45,7 @@ public class PetListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(final int position) {
-        return R.layout.search_item;
+        return R.layout.favorites_item;
     }
 }
 

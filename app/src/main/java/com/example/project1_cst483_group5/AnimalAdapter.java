@@ -1,5 +1,8 @@
 package com.example.project1_cst483_group5;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,9 +60,17 @@ public class AnimalAdapter extends RecyclerView.Adapter {
 //                Intent intent = Favorites.getIntent(getApplicationContext(),auth);
 //                intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH",auth);
 //                startActivity(intent);
-                Toast.makeText(view.getContext(), "CLICK ON INFO Model Page", Toast.LENGTH_SHORT).show();
+                showAlertDialog(view.getContext(), this);
+//                Toast.makeText(view.getContext(), "CLICK ON INFO Model Page", Toast.LENGTH_SHORT).show();
+            }
+            private void showAlertDialog(Context context, View.OnClickListener onClickListener){
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("More Info!");
+                builder.setMessage("Here's pic, name, type, age");
+                builder.show();
             }
         });
+
 
     }
 

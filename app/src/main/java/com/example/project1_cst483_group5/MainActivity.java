@@ -128,10 +128,7 @@ public class MainActivity extends AppCompatActivity {
     public void login(Integer userId) {
         Intent intent = Favorites.getIntent(getApplicationContext(),authorization.getAccess_token());
         intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
-        //intent.putExtra("FAVORITES_COM_PROJ1_G5_ID",userId);
-        startActivity(intent);
-//        Intent i = new Intent(getApplicationContext(), Favorites.class);
-//        startActivity(i);
+        startActivity(new Intent(MainActivity.this, Favorites.class));
 
 
     }

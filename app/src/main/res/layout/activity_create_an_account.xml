@@ -7,6 +7,7 @@
     android:background="#C0A377"
     android:orientation="vertical"
     tools:context=".CreateAnAccount">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,48 +17,57 @@
         android:layout_gravity="center"
         android:padding="25dp"
         />
-    <EditText
-        android:id="@+id/etFirstName"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        android:ems="10"
-        android:hint="Enter first name"/>
 
-    <EditText
-        android:id="@+id/etCreatePassword"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:gravity="center"
-        android:hint="Enter password"/>
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <EditText
-        android:id="@+id/etCreateEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:gravity="center"
-        android:hint="Enter email"/>
+            <EditText
+                android:id="@+id/etFirstName"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:ems="10"
+                android:hint="Enter first name" />
 
-    <Button
-        android:id="@+id/btnCreateAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="183dp"
-        android:text="@string/create_an_account"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCreatePassword" />
+            <EditText
+                android:id="@+id/etCreatePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:gravity="center"
+                android:hint="Enter password"/>
+
+            <EditText
+                android:id="@+id/etCreateEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:gravity="center"
+                android:hint="Enter email"/>
+
+            <Button
+                android:id="@+id/btnCreateAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="183dp"
+                android:text="@string/create_an_account"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etCreatePassword" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -46,7 +46,7 @@
                 android:hint="Enter password"/>
 
             <EditText
-                android:id="@+id/etCreateEmail"
+                android:id="@+id/etUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"

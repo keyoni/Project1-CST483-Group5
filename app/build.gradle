@@ -55,6 +55,10 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
 
+    //Image Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     testImplementation 'junit:junit:4.13.2'
 

@@ -36,8 +36,25 @@ public class Animal {
     @SerializedName("description")
     String mDescription;
 
+
+    @SerializedName("status")
+    String mStatus;
+
     @SerializedName("photos")
     List<Photos> mPhoto;
+
+
+    public void setmID(Integer mID) {
+        this.mID = mID;
+    }
+
+    public String getmStatus() {
+        return mStatus;
+    }
+
+    public void setmStatus(String mStatus) {
+        this.mStatus = mStatus;
+    }
 
     public String getmType() {
         return mType;

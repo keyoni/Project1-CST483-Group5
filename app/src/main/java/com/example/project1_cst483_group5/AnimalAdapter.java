@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import com.example.project1_cst483_group5.db.PetViewModel;
 import com.example.project1_cst483_group5.db.UserViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +98,36 @@ public class AnimalAdapter extends RecyclerView.Adapter {
                         temp = animalResult.getAnimal();
                         Log.d("API TEST", animalResult.getAnimal().mName + "");
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setTitle("More Info!");
-                        builder.setMessage(animalResult.getAnimal().mName);
+                        LayoutInflater inflater  = LayoutInflater.from(context);
+                        View  dialogLayout = inflater.inflate(R.layout.custom_more_info, null);
+                        builder.setView(dialogLayout);
+                        TextView nameMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvNameMoreInfo);
+                        nameMoreInfo.setText((temp.getmName()));
+
+                        TextView ageMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvAgeMoreInfo);
+                        ageMoreInfo.setText((temp.getmAge()));
+
+                        TextView genderMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvGenderMoreInfo);
+                        genderMoreInfo.setText((temp.getmGender()));
+
+                        TextView descMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvDescMoreInfo);
+                        descMoreInfo.setText((temp.getmDescription()));
+
+                        TextView sizeMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvSizeMoreInfo);
+                        sizeMoreInfo.setText((temp.getmSize()));
+
+                        TextView statusMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvStatusMoreInfo);
+                        statusMoreInfo.setText((temp.getmStatus()));
+
+
+
+
+                        ImageView picture  = dialogLayout.findViewById(R.id.ivPicture);
+                        Picasso.get().load(temp.mPhoto.get(0).full)
+                                .resize(300, 300)
+                                .centerCrop()
+                                .into(picture);
+
                         builder.show();
 
                     }

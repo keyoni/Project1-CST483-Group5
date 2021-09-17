@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -92,7 +93,7 @@ public class Favorites extends AppCompatActivity {
 
         //Toast.makeText(Favorites.this, pets.get(0).getMName() + " is here", Toast.LENGTH_SHORT).show();
         if(pets == null || pets.isEmpty()){
-            Toast.makeText(Favorites.this, "Search to add pets", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Favorites.this, "Refresh to See List", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(Favorites.this, pets.get(0).getMName() + " is here", Toast.LENGTH_SHORT).show();
@@ -105,6 +106,7 @@ public class Favorites extends AppCompatActivity {
                         animal.getMGender()));
             }
         }
+        LayoutInflater inflater = getLayoutInflater();
 
         PetListAdapter petAdapter = new PetListAdapter(petListViewModelList,petVM,auth,Favorites.this);
         //petAdapter.notifyDataSetChanged();

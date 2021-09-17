@@ -11,18 +11,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project1_cst483_group5.db.PetViewModel;
 import com.example.project1_cst483_group5.db.UserViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -251,10 +254,46 @@ public void yipYip(String auth, Integer userId, View.OnClickListener onClickList
             randomAnimal = animalResult.getAnimal();
             Log.d("API TEST", randomAnimal.getmName() + "");
             AlertDialog.Builder builder = new AlertDialog.Builder(Search.this);
-            builder.setTitle("More Info!");
-            builder.setMessage(randomAnimal.getmName() +"");
+            LayoutInflater inflater  = LayoutInflater.from(Search.this);
+            View  dialogLayout = inflater.inflate(R.layout.custom_more_info, null);
+            builder.setView(dialogLayout);
+            TextView nameMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvNameMoreInfo);
+            nameMoreInfo.setText((randomAnimal.getmName()));
+
+            TextView ageMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvAgeMoreInfo);
+            ageMoreInfo.setText((randomAnimal.getmAge()));
+
+            TextView genderMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvGenderMoreInfo);
+            genderMoreInfo.setText((randomAnimal.getmGender()));
+
+            TextView descMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvDescMoreInfo);
+            descMoreInfo.setText((randomAnimal.getmDescription()));
+
+            TextView sizeMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvSizeMoreInfo);
+            sizeMoreInfo.setText((randomAnimal.getmSize()));
+
+            TextView statusMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvStatusMoreInfo);
+            statusMoreInfo.setText((randomAnimal.getmStatus()));
+
+
+
+
+            ImageView picture  = dialogLayout.findViewById(R.id.ivPicture);
+            if(randomAnimal.mPhoto.isEmpty()) {
+                Picasso.get().load(R.drawable.error_pic)
+                        .resize(300, 300)
+                        .centerCrop()
+                        .into(picture);
+
+            }else {
+                Picasso.get().load(randomAnimal.mPhoto.get(0).full)
+                        .resize(300, 300)
+                        .centerCrop()
+                        .error(R.drawable.error_pic)
+                        .into(picture);
+            }
+
             builder.show();
-//
 //            SingleAnimal results = response.body();
 //            randomAnimal = results.getAnimal();
 //            if (randomAnimal == null) {

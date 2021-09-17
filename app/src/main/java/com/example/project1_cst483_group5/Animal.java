@@ -40,6 +40,9 @@ public class Animal {
     @SerializedName("status")
     String mStatus;
 
+    @SerializedName("url")
+    String url;
+
     @SerializedName("photos")
     List<Photos> mPhoto;
 

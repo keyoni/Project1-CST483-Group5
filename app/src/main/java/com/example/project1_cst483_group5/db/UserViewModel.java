@@ -34,4 +34,8 @@ public class UserViewModel extends AndroidViewModel {
      public List<User> getUsersByUsernameAndPassword(String mUsername, String mPassword) {
         return userRepo.getUserByUsernameAndPassword(mUsername,mPassword);
      }
+
+     public void changeUsername(String mUsername, Integer mUserID) {
+        userRepo.changeUsername(mUsername,mUserID);
+     }
 }

@@ -115,13 +115,21 @@ public class PetListAdapter extends RecyclerView.Adapter {
 
 
                         ImageView picture  = dialogLayout.findViewById(R.id.ivPicture);
-                        Picasso.get().load(temp.mPhoto.get(0).full)
-                                .resize(300, 300)
-                                .centerCrop()
-                                .into(picture);
+                        if(temp.mPhoto.isEmpty()) {
+                            Picasso.get().load(R.drawable.error_pic)
+                                    .resize(300, 300)
+                                    .centerCrop()
+                                    .into(picture);
+
+                        }else {
+                            Picasso.get().load(temp.mPhoto.get(0).full)
+                                    .resize(300, 300)
+                                    .centerCrop()
+                                    .error(R.drawable.error_pic)
+                                    .into(picture);
+                        }
 
                         builder.show();
-
                     }
 
 

@@ -21,4 +21,7 @@ public interface UserDao {
 
     @Query("SELECT COUNT(userID) FROM user_table ")
     int getUserCount();
+
+    @Query("UPDATE user_table SET username = :mUsername WHERE userID = :mUserID")
+    void changeUsername(String mUsername, Integer mUserID);
 }

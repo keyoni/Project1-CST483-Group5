@@ -46,4 +46,11 @@ public class UserRepository {
         });
         return currentUser;
     }
+
+    void changeUsername(String mUsername, Integer mUserID) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mUserDao.changeUsername(mUsername,mUserID);
+        });
+
+    }
 }

@@ -255,7 +255,8 @@ public class Search extends AppCompatActivity {
      */
     public void toFavoritesPage(String auth) {
         Intent intent = Favorites.getIntent(getApplicationContext(), auth);
-        intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH", auth);
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH", auth);
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_ID", userId);
         startActivity(intent);
     }
 
@@ -277,7 +278,7 @@ public class Search extends AppCompatActivity {
         int int_rand = randId.nextInt(upperbound);
 
 
-        Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  base + int_rand);
+        Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth, base + int_rand);
         //Call<SingleAnimal> animalCall = petFinderApi.getAnimalById(" Bearer " + auth, base + int_rand);
         animalCall.enqueue(new Callback<SingleAnimal>() {
             @Override

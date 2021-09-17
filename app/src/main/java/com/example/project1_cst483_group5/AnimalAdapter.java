@@ -139,13 +139,12 @@ public class AnimalAdapter extends RecyclerView.Adapter {
                         if (temp.mPhoto.isEmpty()) {
                             Picasso.get().load(R.drawable.error_pic)
                                     .resize(300, 300)
-                                    .centerCrop()
+
                                     .into(picture);
 
                         } else {
-                            Picasso.get().load(temp.mPhoto.get(0).full)
+                            Picasso.get().load(temp.mPhoto.get(0).large)
                                     .resize(300, 300)
-                                    .centerCrop()
                                     .error(R.drawable.error_pic)
                                     .into(picture);
                         }

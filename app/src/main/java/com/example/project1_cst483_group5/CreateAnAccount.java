@@ -16,8 +16,17 @@ import com.example.project1_cst483_group5.db.UserViewModel;
 
 import java.util.List;
 
+/**
+ * The type Create an account.
+ */
 public class CreateAnAccount extends AppCompatActivity {
+    /**
+     * The User vm.
+     */
     public UserViewModel userVM;
+    /**
+     * The Create acc btn.
+     */
     public Button createAccBtn;
 
     @Override
@@ -37,24 +46,30 @@ public class CreateAnAccount extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createAccount(mName, mUsername, mPassword);
-                Intent i =new Intent(CreateAnAccount.this, MainActivity.class);
+                Intent i = new Intent(CreateAnAccount.this, MainActivity.class);
                 startActivity(i);
             }
         });
     }
 
 
-    public void createAccount(EditText names, EditText username, EditText password){
+    /**
+     * Create account.
+     *
+     * @param names    the names
+     * @param username the username
+     * @param password the password
+     */
+    public void createAccount(EditText names, EditText username, EditText password) {
         String mUsername, mPassword, mName;
         mUsername = username.getText().toString();
         mPassword = password.getText().toString();
-        mName= names.getText().toString();
-        User tempUser = new User(mName,  mUsername, mPassword);
-        if(tempUser != null) {
+        mName = names.getText().toString();
+        User tempUser = new User(mName, mUsername, mPassword);
+        if (tempUser != null) {
             userVM.insert(tempUser);
         }
     }
-
 
 
 //    public static Intent getIntent(Context context, String auth) {

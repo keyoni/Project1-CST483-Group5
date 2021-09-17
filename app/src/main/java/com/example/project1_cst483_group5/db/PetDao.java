@@ -35,7 +35,7 @@ public interface PetDao {
      * Delete all.
      */
     @Query("DELETE FROM pet_table")
-        //not sure why this is an error
+    //not sure why this is an error
     void deleteAll();
 
     /**
@@ -44,7 +44,7 @@ public interface PetDao {
      * @param mID the m id
      */
     @Query("DELETE FROM pet_table WHERE id = :mID")
-        //not sure why this is an error
+    //not sure why this is an error
     void deletePet(Integer mID);
 
     /**

@@ -1,7 +1,5 @@
 package com.example.project1_cst483_group5;
 
-import static java.sql.Types.NULL;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,18 +14,12 @@ import android.widget.Toast;
 
 import com.example.project1_cst483_group5.db.User;
 import com.example.project1_cst483_group5.db.UserViewModel;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * The type Main activity.
@@ -65,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         createAccBtn = findViewById(R.id.btnCreatePage);
 
         EditText user, password;
-        user = findViewById(R.id.etLoginEmail);
+        user = findViewById(R.id.etLoginUsername);
         password = findViewById(R.id.etLoginPassword);
 
         //Log.d("API TEST", userVM.getUserCount() + ": number of Users");
@@ -192,9 +184,6 @@ public class MainActivity extends AppCompatActivity {
         return intent;
     }
 }
-
-
-
 
 
 //        Gson gson = new GsonBuilder().serializeNulls().create();

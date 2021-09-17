@@ -167,7 +167,7 @@ public class Favorites extends AppCompatActivity {
      */
     public void toSearchPage(String auth) {
         Intent intent = Search.getIntent(getApplicationContext(), auth);
-        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH", auth);
+        intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH", auth);
         intent.putExtra("SEARCH_COM_PROJ1_G5_ID", userId);
         startActivity(intent);
 

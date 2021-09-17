@@ -41,4 +41,12 @@ public class AuthApi {
     public void setAccess_token(String access_token) {
         this.access_token = access_token;
     }
+
+    public String getTokenType() {
+        return tokenType;
+    }
+
+    public void setTokenType(String tokenType) {
+        this.tokenType = tokenType;
+    }
 }

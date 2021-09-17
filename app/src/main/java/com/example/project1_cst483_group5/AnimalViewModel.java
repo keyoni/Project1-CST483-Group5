@@ -7,11 +7,11 @@ import androidx.annotation.NonNull;
 public class AnimalViewModel {
 
 
-        private String name;
-        private Integer id;
-        private String type;
-        private String age;
-        private String gender;
+    private String name;
+    private Integer id;
+    private String type;
+    private String age;
+    private String gender;
 
     public AnimalViewModel(Integer id, String name, String type, String age, String gender) {
         this.id = id;
@@ -54,7 +54,11 @@ public class AnimalViewModel {
         this.gender = gender;
     }
 
-    public Integer getId() { return id; }
+    public Integer getId() {
+        return id;
+    }
 
-    public void setId(Integer id) { this.id = id;  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

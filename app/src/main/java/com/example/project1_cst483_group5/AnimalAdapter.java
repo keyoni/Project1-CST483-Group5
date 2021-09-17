@@ -38,9 +38,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AnimalAdapter extends RecyclerView.Adapter {
 
     private List<AnimalViewModel> animalViewModels = new ArrayList<>();
-    private PetViewModel petVM;
-    private  Integer userId;
-    private String auth;
+    private final PetViewModel petVM;
+    private final Integer userId;
+    private final String auth;
     private SingleAnimal animalResult;
     private Animal temp;
     Context context;
@@ -58,7 +58,7 @@ public class AnimalAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         return new AnimalViewHolder(view);
-}
+    }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -83,7 +83,7 @@ public class AnimalAdapter extends RecyclerView.Adapter {
                 Log.d("API TEST", "inside info onclick ANIMAL");
                 Log.d("API TEST", ((AnimalViewHolder) holder).id.getText().toString());
 
-                Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  parseInt(((AnimalViewHolder) holder).id.getText().toString()));
+                Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth, parseInt(((AnimalViewHolder) holder).id.getText().toString()));
 
                 animalCall.enqueue(new Callback<SingleAnimal>() {
                     @Override
@@ -98,38 +98,36 @@ public class AnimalAdapter extends RecyclerView.Adapter {
                         temp = animalResult.getAnimal();
                         Log.d("API TEST", animalResult.getAnimal().mName + "");
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        LayoutInflater inflater  = LayoutInflater.from(context);
-                        View  dialogLayout = inflater.inflate(R.layout.custom_more_info, null);
+                        LayoutInflater inflater = LayoutInflater.from(context);
+                        View dialogLayout = inflater.inflate(R.layout.custom_more_info, null);
                         builder.setView(dialogLayout);
-                        TextView nameMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvNameMoreInfo);
+                        TextView nameMoreInfo = dialogLayout.findViewById(R.id.tvNameMoreInfo);
                         nameMoreInfo.setText((temp.getmName()));
 
-                        TextView ageMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvAgeMoreInfo);
+                        TextView ageMoreInfo = dialogLayout.findViewById(R.id.tvAgeMoreInfo);
                         ageMoreInfo.setText((temp.getmAge()));
 
-                        TextView genderMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvGenderMoreInfo);
+                        TextView genderMoreInfo = dialogLayout.findViewById(R.id.tvGenderMoreInfo);
                         genderMoreInfo.setText((temp.getmGender()));
 
-                        TextView descMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvDescMoreInfo);
+                        TextView descMoreInfo = dialogLayout.findViewById(R.id.tvDescMoreInfo);
                         descMoreInfo.setText((temp.getmDescription()));
 
-                        TextView sizeMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvSizeMoreInfo);
+                        TextView sizeMoreInfo = dialogLayout.findViewById(R.id.tvSizeMoreInfo);
                         sizeMoreInfo.setText((temp.getmSize()));
 
-                        TextView statusMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvStatusMoreInfo);
+                        TextView statusMoreInfo = dialogLayout.findViewById(R.id.tvStatusMoreInfo);
                         statusMoreInfo.setText((temp.getmStatus()));
 
 
-
-
-                        ImageView picture  = dialogLayout.findViewById(R.id.ivPicture);
-                        if(temp.mPhoto.isEmpty()) {
+                        ImageView picture = dialogLayout.findViewById(R.id.ivPicture);
+                        if (temp.mPhoto.isEmpty()) {
                             Picasso.get().load(R.drawable.error_pic)
                                     .resize(300, 300)
                                     .centerCrop()
                                     .into(picture);
 
-                        }else {
+                        } else {
                             Picasso.get().load(temp.mPhoto.get(0).full)
                                     .resize(300, 300)
                                     .centerCrop()
@@ -217,7 +215,7 @@ public class AnimalAdapter extends RecyclerView.Adapter {
 //               //builder.setMessage((animalResult.getAnimal().getmName()));
 //             builder.setMessage(("I'm Broken"));
 //                builder.show();
-        //}
+    //}
 ////
 //        });
 //

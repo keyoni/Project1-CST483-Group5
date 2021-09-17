@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
     public void createUsers(int count) {
         Log.d("API TEST", count + " : number of Users");
         if (count != 0) {
-        for (int i = 0; i < 3; i++) {
-            User tempUser = new User("User" + (i + 1),"user" + (i + 1), "password" + (i +1));
-            userVM.insert(tempUser);
-        }
+            for (int i = 0; i < 3; i++) {
+                User tempUser = new User("User" + (i + 1), "user" + (i + 1), "password" + (i + 1));
+                userVM.insert(tempUser);
+            }
         }
 
     }
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-        private void getAuth() {
+    private void getAuth() {
         Log.d("API TEST", "helloooo");
 
         AuthRequest authRequest = new AuthRequest("client_credentials",
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<AuthApi> call, Response<AuthApi> response) {
 
                 if (!response.isSuccessful()) {
-                    Log.d("API TEST","Code: " + response.code());
+                    Log.d("API TEST", "Code: " + response.code());
                     return;
                 }
                 authorization = response.body();
@@ -133,11 +133,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-   }
+    }
+
     public void login() {
-        Intent intent = Favorites.getIntent(getApplicationContext(),authorization.getAccess_token());
-        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
-        intent.putExtra("FAVORITES_COM_PROJ1_G5_ID",userId);
+        Intent intent = Favorites.getIntent(getApplicationContext(), authorization.getAccess_token());
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH", authorization.getAccess_token());
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_ID", userId);
         startActivity(intent);
 //        Intent i = new Intent(getApplicationContext(), Favorites.class);
 //        startActivity(i);
@@ -173,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
 //                .build();
 //
 //        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
-
 
 
 //    Log.d(;"API TEST", petFinderApi.Auth("client_credential",

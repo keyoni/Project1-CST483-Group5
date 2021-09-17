@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PetRepository {
 
-    private PetDao mPetDao;
+    private final PetDao mPetDao;
     private LiveData<List<Pet>> mAllPets;
     private List<Pet> mAllFavorites;
 
@@ -39,18 +39,18 @@ public class PetRepository {
     }
 
     void deletePet(Integer mID) {
-            AppDatabase.databaseWriteExecutor.execute(() -> {
-                mPetDao.deletePet(mID);
-            });
-        }
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mPetDao.deletePet(mID);
+        });
+    }
 
 
-    List<Pet> getAllFavorites(Integer mUserID){
-            AppDatabase.databaseWriteExecutor.execute(() -> {
-                mAllFavorites = mPetDao.getPetsByUserID(mUserID);
-            });
+    List<Pet> getAllFavorites(Integer mUserID) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mAllFavorites = mPetDao.getPetsByUserID(mUserID);
+        });
 
-            return mAllFavorites;
+        return mAllFavorites;
     }
 
 }

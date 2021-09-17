@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Photos {
 
-   String small;
-   String medium;
-   String large;
-   String full;
+    String small;
+    String medium;
+    String large;
+    String full;
 
     public Photos(String small, String medium, String large, String full) {
         this.small = small;

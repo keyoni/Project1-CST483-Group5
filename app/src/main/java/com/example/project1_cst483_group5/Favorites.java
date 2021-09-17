@@ -27,7 +27,7 @@ public class Favorites extends AppCompatActivity {
     public static final String ACTIVITY_LABEL_ID = "FAVORITES_COM_PROJ1_G5_ID";
     public Button searchBtn;
     public Button refreshBtn;
-    public  Button logoutBtn;
+    public Button logoutBtn;
     public PetViewModel petVM;
     RecyclerView recyclerView;
     public List<Pet> pets;
@@ -35,20 +35,19 @@ public class Favorites extends AppCompatActivity {
     private String auth;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites2);
 
-        recyclerView = (RecyclerView)findViewById(R.id.rvFavorites);
+        recyclerView = findViewById(R.id.rvFavorites);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         petVM = new ViewModelProvider(this).get(PetViewModel.class);
 
         auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
-        userId = getIntent().getIntExtra(ACTIVITY_LABEL_ID,0);
+        userId = getIntent().getIntExtra(ACTIVITY_LABEL_ID, 0);
         //userId = 1;
 
         refreshBtn = findViewById(R.id.btnRefresh);
@@ -76,9 +75,10 @@ public class Favorites extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Favorites.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                toSettingsPage();
+//                Intent intent = new Intent(Favorites.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
             }
         });
 
@@ -92,7 +92,7 @@ public class Favorites extends AppCompatActivity {
         pets = petVM.getPetsByUserID(userId);
 
         //Toast.makeText(Favorites.this, pets.get(0).getMName() + " is here", Toast.LENGTH_SHORT).show();
-        if(pets == null || pets.isEmpty()){
+        if (pets == null || pets.isEmpty()) {
             Toast.makeText(Favorites.this, "Refresh to See List", Toast.LENGTH_SHORT).show();
 
         } else {
@@ -108,7 +108,7 @@ public class Favorites extends AppCompatActivity {
         }
         LayoutInflater inflater = getLayoutInflater();
 
-        PetListAdapter petAdapter = new PetListAdapter(petListViewModelList,petVM,auth,Favorites.this);
+        PetListAdapter petAdapter = new PetListAdapter(petListViewModelList, petVM, auth, Favorites.this);
         //petAdapter.notifyDataSetChanged();
 
         recyclerView.setAdapter(petAdapter);
@@ -120,16 +120,24 @@ public class Favorites extends AppCompatActivity {
     public static Intent getIntent(Context context, String auth) {
         Intent intent = new Intent(context, Favorites.class);
 
-        intent.putExtra(Favorites.ACTIVITY_LABEL_AUTH,auth);
+        intent.putExtra(Favorites.ACTIVITY_LABEL_AUTH, auth);
 
         return intent;
 
     }
 
     public void toSearchPage(String auth) {
-        Intent intent = Search.getIntent(getApplicationContext(),auth);
-        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",auth);
-        intent.putExtra("SEARCH_COM_PROJ1_G5_ID",userId);
+        Intent intent = Search.getIntent(getApplicationContext(), auth);
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH", auth);
+        intent.putExtra("SEARCH_COM_PROJ1_G5_ID", userId);
+        startActivity(intent);
+
+
+    }
+
+    public void toSettingsPage() {
+        Intent intent = Settings.getIntent(getApplicationContext(), userId);
+        intent.putExtra("SETTINGS_COM_PROJ1_G5_ID", userId);
         startActivity(intent);
     }
 

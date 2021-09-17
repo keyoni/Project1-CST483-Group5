@@ -30,14 +30,14 @@ import retrofit2.Response;
 public class PetListAdapter extends RecyclerView.Adapter {
 
     private List<PetListViewModel> petListViewModels = new ArrayList<>();
-    private PetViewModel petVM;
-    private String auth;
+    private final PetViewModel petVM;
+    private final String auth;
     private SingleAnimal animalResult;
     private Animal temp;
     Context context;
 
 
-    public PetListAdapter(List<PetListViewModel> petViewModels, PetViewModel petViewModel,  String auth, Context context) {
+    public PetListAdapter(List<PetListViewModel> petViewModels, PetViewModel petViewModel, String auth, Context context) {
         this.petListViewModels = petViewModels;
         this.petVM = petViewModel;
         this.auth = auth;
@@ -58,7 +58,7 @@ public class PetListAdapter extends RecyclerView.Adapter {
         ((PetListViewHolder) holder).trashBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Refresh to see updated list" + ((PetListViewHolder) holder).id.getText().toString() ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Refresh to see updated list" + ((PetListViewHolder) holder).id.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 petVM.deletePet(parseInt(((PetListViewHolder) holder).id.getText().toString()));
             }
@@ -70,7 +70,7 @@ public class PetListAdapter extends RecyclerView.Adapter {
                 Log.d("API TEST", "inside info onclick ANIMAL");
                 Log.d("API TEST", ((PetListViewHolder) holder).id.getText().toString());
 
-                Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  parseInt(((PetListViewHolder) holder).id.getText().toString()));
+                Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth, parseInt(((PetListViewHolder) holder).id.getText().toString()));
 
                 animalCall.enqueue(new Callback<SingleAnimal>() {
                     @Override
@@ -79,9 +79,9 @@ public class PetListAdapter extends RecyclerView.Adapter {
                         if (!response.isSuccessful()) {
                             Log.d("API TEST", "Code: " + response.code());
                             // you don't see this...
-                            if(response.code() == 404) {
-                                Toast.makeText(view.getContext(), "Pet was adopted <3" + ((PetListViewHolder) holder).id.getText().toString() ,Toast.LENGTH_SHORT).show();
-                                petVM.deletePet (parseInt(((PetListViewHolder) holder).id.getText().toString()));
+                            if (response.code() == 404) {
+                                Toast.makeText(view.getContext(), "Pet was adopted <3" + ((PetListViewHolder) holder).id.getText().toString(), Toast.LENGTH_SHORT).show();
+                                petVM.deletePet(parseInt(((PetListViewHolder) holder).id.getText().toString()));
                             }
                             return;
                         }
@@ -90,38 +90,36 @@ public class PetListAdapter extends RecyclerView.Adapter {
                         temp = animalResult.getAnimal();
                         Log.d("API TEST", animalResult.getAnimal().mName + "");
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                       LayoutInflater inflater  = LayoutInflater.from(context);
-                       View  dialogLayout = inflater.inflate(R.layout.custom_more_info, null);
-                       builder.setView(dialogLayout);
-                        TextView nameMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvNameMoreInfo);
+                        LayoutInflater inflater = LayoutInflater.from(context);
+                        View dialogLayout = inflater.inflate(R.layout.custom_more_info, null);
+                        builder.setView(dialogLayout);
+                        TextView nameMoreInfo = dialogLayout.findViewById(R.id.tvNameMoreInfo);
                         nameMoreInfo.setText((temp.getmName()));
 
-                        TextView ageMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvAgeMoreInfo);
+                        TextView ageMoreInfo = dialogLayout.findViewById(R.id.tvAgeMoreInfo);
                         ageMoreInfo.setText((temp.getmAge()));
 
-                        TextView genderMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvGenderMoreInfo);
+                        TextView genderMoreInfo = dialogLayout.findViewById(R.id.tvGenderMoreInfo);
                         genderMoreInfo.setText((temp.getmGender()));
 
-                        TextView descMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvDescMoreInfo);
+                        TextView descMoreInfo = dialogLayout.findViewById(R.id.tvDescMoreInfo);
                         descMoreInfo.setText((temp.getmDescription()));
 
-                        TextView sizeMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvSizeMoreInfo);
+                        TextView sizeMoreInfo = dialogLayout.findViewById(R.id.tvSizeMoreInfo);
                         sizeMoreInfo.setText((temp.getmSize()));
 
-                        TextView statusMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvStatusMoreInfo);
+                        TextView statusMoreInfo = dialogLayout.findViewById(R.id.tvStatusMoreInfo);
                         statusMoreInfo.setText((temp.getmStatus()));
 
 
-
-
-                        ImageView picture  = dialogLayout.findViewById(R.id.ivPicture);
-                        if(temp.mPhoto.isEmpty()) {
+                        ImageView picture = dialogLayout.findViewById(R.id.ivPicture);
+                        if (temp.mPhoto.isEmpty()) {
                             Picasso.get().load(R.drawable.error_pic)
                                     .resize(300, 300)
                                     .centerCrop()
                                     .into(picture);
 
-                        }else {
+                        } else {
                             Picasso.get().load(temp.mPhoto.get(0).full)
                                     .resize(300, 300)
                                     .centerCrop()
@@ -131,7 +129,6 @@ public class PetListAdapter extends RecyclerView.Adapter {
 
                         builder.show();
                     }
-
 
 
                     @Override

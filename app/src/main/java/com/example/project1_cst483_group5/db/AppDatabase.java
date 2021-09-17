@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
+
     public abstract PetDao petDao();
 
     private static volatile AppDatabase INSTANCE;

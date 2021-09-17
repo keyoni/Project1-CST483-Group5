@@ -17,23 +17,21 @@ public interface PetFinderApi {
 
 
     @POST("oauth2/token")
-     Call<AuthApi> Auth(@Body AuthRequest authRequest);
-
+    Call<AuthApi> Auth(@Body AuthRequest authRequest);
 
 
     @GET("animals")
-    Call<AnimalResults> getBasicAnimalList( @Header("Authorization") String auth);
+    Call<AnimalResults> getBasicAnimalList(@Header("Authorization") String auth);
 
     @GET("animals")
-    Call<AnimalResults> getFilteredAnimalList( @Header("Authorization") String auth,
-                                               @Query("gender") String gender,
-                                               @Query("type") String type,
-                                               @Query("age") String age);
+    Call<AnimalResults> getFilteredAnimalList(@Header("Authorization") String auth,
+                                              @Query("gender") String gender,
+                                              @Query("type") String type,
+                                              @Query("age") String age);
+
     @GET("animals/{id}")
     Call<SingleAnimal> getAnimalById(@Header("Authorization") String auth,
-                               @Path("id") Integer id);
-
-
+                                     @Path("id") Integer id);
 
 
 //    @FormUrlEncoded

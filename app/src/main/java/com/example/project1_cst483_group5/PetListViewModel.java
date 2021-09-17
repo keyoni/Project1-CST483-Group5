@@ -18,8 +18,7 @@ public class PetListViewModel {
     private String gender;
 
 
-    public PetListViewModel( Integer id, String name, String type, String gender) {
-
+    public PetListViewModel(Integer id, String name, String type, String gender) {
 
 
         this.id = id;
@@ -54,10 +53,13 @@ public class PetListViewModel {
         this.gender = gender;
     }
 
-    public Integer getId() { return id; }
+    public Integer getId() {
+        return id;
+    }
 
-    public void setId(Integer id) { this.id = id;  }
-
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
 }

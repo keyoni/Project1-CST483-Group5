@@ -27,8 +27,8 @@ public class AnimalViewHolder extends RecyclerView.ViewHolder {
         id = itemView.findViewById(R.id.tvIdSearch);
 
 
-       favBtn = itemView.findViewById(R.id.ivFav);
-       infoBtnSearch = itemView.findViewById(R.id.ivInfo);
+        favBtn = itemView.findViewById(R.id.ivFav);
+        infoBtnSearch = itemView.findViewById(R.id.ivInfo);
     }
 
     public void bindData(final AnimalViewModel viewModel) {

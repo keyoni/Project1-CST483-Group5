@@ -1,7 +1,6 @@
 package com.example.project1_cst483_group5;
 
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -34,6 +33,7 @@ public class PetFinderClient {
             .addConverterFactory(GsonConverterFactory.create())
             //.client(client)
             .build();
+
     public static synchronized PetFinderClient getInstance() {
         if (instance == null) {
             instance = new PetFinderClient();

@@ -49,7 +49,9 @@ public class Pet {
     }
 
     @NonNull
-    public void setMPetID(Integer mPetID){this.mPetID =mPetID; }
+    public void setMPetID(Integer mPetID) {
+        this.mPetID = mPetID;
+    }
 
     @NonNull
     public Integer getMPetID() {

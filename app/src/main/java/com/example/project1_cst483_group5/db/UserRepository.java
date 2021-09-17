@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class UserRepository {
-    private UserDao mUserDao;
+    private final UserDao mUserDao;
     private String name;
     private int userCount;
     private List<User> currentUser;
@@ -42,14 +42,14 @@ public class UserRepository {
     List<User> getUserByUsernameAndPassword(String mUsername, String mPassword) {
 
         AppDatabase.databaseWriteExecutor.execute(() -> {
-           currentUser = mUserDao.getUsersByUsernameAndPassword(mUsername,mPassword);
+            currentUser = mUserDao.getUsersByUsernameAndPassword(mUsername, mPassword);
         });
         return currentUser;
     }
 
     void changeUsername(String mUsername, Integer mUserID) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            mUserDao.changeUsername(mUsername,mUserID);
+            mUserDao.changeUsername(mUsername, mUserID);
         });
 
     }

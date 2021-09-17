@@ -11,12 +11,12 @@ import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
 
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
 
     public UserViewModel(@NonNull Application application) {
         super(application);
 
-         userRepo = new UserRepository(application);
+        userRepo = new UserRepository(application);
     }
 
     public void insert(User user) {
@@ -24,18 +24,18 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public String getName(int userId) {
-       return userRepo.getName(userId);
+        return userRepo.getName(userId);
     }
 
-     public int getUserCount() {
-         return userRepo.getUserCount();
-     }
+    public int getUserCount() {
+        return userRepo.getUserCount();
+    }
 
-     public List<User> getUsersByUsernameAndPassword(String mUsername, String mPassword) {
-        return userRepo.getUserByUsernameAndPassword(mUsername,mPassword);
-     }
+    public List<User> getUsersByUsernameAndPassword(String mUsername, String mPassword) {
+        return userRepo.getUserByUsernameAndPassword(mUsername, mPassword);
+    }
 
-     public void changeUsername(String mUsername, Integer mUserID) {
-        userRepo.changeUsername(mUsername,mUserID);
-     }
+    public void changeUsername(String mUsername, Integer mUserID) {
+        userRepo.changeUsername(mUsername, mUserID);
+    }
 }

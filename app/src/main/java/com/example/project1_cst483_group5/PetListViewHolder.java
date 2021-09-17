@@ -12,7 +12,6 @@ import com.example.project1_cst483_group5.db.PetViewModel;
 public class PetListViewHolder extends RecyclerView.ViewHolder {
 
 
-
     //Help from https://willowtreeapps.com/ideas/android-fundamentals-working-with-the-recyclerview-adapter-and-viewholder-pattern
 
     TextView name;
@@ -36,7 +35,7 @@ public class PetListViewHolder extends RecyclerView.ViewHolder {
         favInfoBtn = itemView.findViewById(R.id.ivInfoFav);
     }
 
-    public void bindData ( final PetListViewModel viewModel){
+    public void bindData(final PetListViewModel viewModel) {
         name.setText(viewModel.getName());
         type.setText(viewModel.getType());
 

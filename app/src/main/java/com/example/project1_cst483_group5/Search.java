@@ -55,8 +55,8 @@ public class Search extends AppCompatActivity {
     private String ageChoice;
     private String genderChoice;
     public Button yipYipBtn;
-    private  Button logoutBtn;
-    private SingleAnimal  animalResult;
+    private Button logoutBtn;
+    private SingleAnimal animalResult;
     private Animal randomAnimal;
 
     //TODO: Return this an a thing later??
@@ -69,9 +69,8 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         String auth = getIntent().getStringExtra(ACTIVITY_LABEL_AUTH);
-        userId = getIntent().getIntExtra(ACTIVITY_LABEL_ID,0);
+        userId = getIntent().getIntExtra(ACTIVITY_LABEL_ID, 0);
         petVM = new ViewModelProvider(this).get(PetViewModel.class);
-
 
 
         favBtn = findViewById(R.id.btnFavSearchPage);
@@ -119,14 +118,9 @@ public class Search extends AppCompatActivity {
         });
 
 
-
-        recyclerView = (RecyclerView)findViewById(R.id.rvSearch);
+        recyclerView = findViewById(R.id.rvSearch);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
-
 
 
         //Default list an animals to populate the page first
@@ -138,7 +132,7 @@ public class Search extends AppCompatActivity {
         yipYipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                yipYip(auth,userId, this);
+                yipYip(auth, userId, this);
                 //showAlertDialog(view.getContext(), this);
             }
         });
@@ -169,15 +163,13 @@ public class Search extends AppCompatActivity {
                 finish();
             }
         });
-        
+
 //        favAdd.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                Toast.makeText(Search.this, "CLICK ON", Toast.LENGTH_SHORT).show();
 //            }
 //        });
-
-
 
 
     }
@@ -191,109 +183,108 @@ public class Search extends AppCompatActivity {
 
     //}
 
-    public void favEvent(Context context)
-    {
+    public void favEvent(Context context) {
         Log.d("API TEST", "In FAV EVENT");
         Toast.makeText(Search.this, "CLICK ON", Toast.LENGTH_SHORT).show();
     }
-    public static Intent getIntent(Context context, String auth) {
-        Intent intent = new Intent(context,Search.class);
 
-        intent.putExtra(Search.ACTIVITY_LABEL_AUTH,auth);
+    public static Intent getIntent(Context context, String auth) {
+        Intent intent = new Intent(context, Search.class);
+
+        intent.putExtra(Search.ACTIVITY_LABEL_AUTH, auth);
 
         return intent;
 
     }
 
     public void toFavoritesPage(String auth) {
-        Intent intent = Favorites.getIntent(getApplicationContext(),auth);
-        intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH",auth);
+        Intent intent = Favorites.getIntent(getApplicationContext(), auth);
+        intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH", auth);
         startActivity(intent);
     }
-public void yipYip(String auth, Integer userId, View.OnClickListener onClickListener) {
+
+    public void yipYip(String auth, Integer userId, View.OnClickListener onClickListener) {
 
 
-    Gson gson = new GsonBuilder().serializeNulls().create();
+        Gson gson = new GsonBuilder().serializeNulls().create();
 
-    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    OkHttpClient client = new OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build();
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.petfinder.com/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.petfinder.com/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
 
-    PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
+        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
 
-    Random randId = new Random();
+        Random randId = new Random();
 
-    // look away and send help
-    int upperbound = 42;
-    int base = 52992500;
+        // look away and send help
+        int upperbound = 42;
+        int base = 52992500;
 
-    int int_rand = randId.nextInt(upperbound);
-
-
-    //Call<Animal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  parseInt(((AnimalViewHolder) holder).id.getText().toString()));
-    Call<SingleAnimal> animalCall = petFinderApi.getAnimalById(" Bearer " + auth, base + int_rand);
-    animalCall.enqueue(new Callback<SingleAnimal>() {
-        @Override
-        public void onResponse(Call<SingleAnimal> call, Response<SingleAnimal> response) {
-            Log.d("API TEST", "inside SINGLE ANIMAL");
-            if (!response.isSuccessful()) {
-                Log.d("API TEST", "Code: " + response.code());
-                return;
-            }
-
-            animalResult = response.body();
-            randomAnimal = animalResult.getAnimal();
-            Log.d("API TEST", randomAnimal.getmName() + "");
-            AlertDialog.Builder builder = new AlertDialog.Builder(Search.this);
-            LayoutInflater inflater  = LayoutInflater.from(Search.this);
-            View  dialogLayout = inflater.inflate(R.layout.custom_more_info, null);
-            builder.setView(dialogLayout);
-            TextView nameMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvNameMoreInfo);
-            nameMoreInfo.setText((randomAnimal.getmName()));
-
-            TextView ageMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvAgeMoreInfo);
-            ageMoreInfo.setText((randomAnimal.getmAge()));
-
-            TextView genderMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvGenderMoreInfo);
-            genderMoreInfo.setText((randomAnimal.getmGender()));
-
-            TextView descMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvDescMoreInfo);
-            descMoreInfo.setText((randomAnimal.getmDescription()));
-
-            TextView sizeMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvSizeMoreInfo);
-            sizeMoreInfo.setText((randomAnimal.getmSize()));
-
-            TextView statusMoreInfo = (TextView) dialogLayout.findViewById(R.id.tvStatusMoreInfo);
-            statusMoreInfo.setText((randomAnimal.getmStatus()));
+        int int_rand = randId.nextInt(upperbound);
 
 
+        //Call<Animal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  parseInt(((AnimalViewHolder) holder).id.getText().toString()));
+        Call<SingleAnimal> animalCall = petFinderApi.getAnimalById(" Bearer " + auth, base + int_rand);
+        animalCall.enqueue(new Callback<SingleAnimal>() {
+            @Override
+            public void onResponse(Call<SingleAnimal> call, Response<SingleAnimal> response) {
+                Log.d("API TEST", "inside SINGLE ANIMAL");
+                if (!response.isSuccessful()) {
+                    Log.d("API TEST", "Code: " + response.code());
+                    return;
+                }
+
+                animalResult = response.body();
+                randomAnimal = animalResult.getAnimal();
+                Log.d("API TEST", randomAnimal.getmName() + "");
+                AlertDialog.Builder builder = new AlertDialog.Builder(Search.this);
+                LayoutInflater inflater = LayoutInflater.from(Search.this);
+                View dialogLayout = inflater.inflate(R.layout.custom_more_info, null);
+                builder.setView(dialogLayout);
+                TextView nameMoreInfo = dialogLayout.findViewById(R.id.tvNameMoreInfo);
+                nameMoreInfo.setText((randomAnimal.getmName()));
+
+                TextView ageMoreInfo = dialogLayout.findViewById(R.id.tvAgeMoreInfo);
+                ageMoreInfo.setText((randomAnimal.getmAge()));
+
+                TextView genderMoreInfo = dialogLayout.findViewById(R.id.tvGenderMoreInfo);
+                genderMoreInfo.setText((randomAnimal.getmGender()));
+
+                TextView descMoreInfo = dialogLayout.findViewById(R.id.tvDescMoreInfo);
+                descMoreInfo.setText((randomAnimal.getmDescription()));
+
+                TextView sizeMoreInfo = dialogLayout.findViewById(R.id.tvSizeMoreInfo);
+                sizeMoreInfo.setText((randomAnimal.getmSize()));
+
+                TextView statusMoreInfo = dialogLayout.findViewById(R.id.tvStatusMoreInfo);
+                statusMoreInfo.setText((randomAnimal.getmStatus()));
 
 
-            ImageView picture  = dialogLayout.findViewById(R.id.ivPicture);
-            if(randomAnimal.mPhoto.isEmpty()) {
-                Picasso.get().load(R.drawable.error_pic)
-                        .resize(300, 300)
-                        .centerCrop()
-                        .into(picture);
+                ImageView picture = dialogLayout.findViewById(R.id.ivPicture);
+                if (randomAnimal.mPhoto.isEmpty()) {
+                    Picasso.get().load(R.drawable.error_pic)
+                            .resize(300, 300)
+                            .centerCrop()
+                            .into(picture);
 
-            }else {
-                Picasso.get().load(randomAnimal.mPhoto.get(0).full)
-                        .resize(300, 300)
-                        .centerCrop()
-                        .error(R.drawable.error_pic)
-                        .into(picture);
-            }
+                } else {
+                    Picasso.get().load(randomAnimal.mPhoto.get(0).full)
+                            .resize(300, 300)
+                            .centerCrop()
+                            .error(R.drawable.error_pic)
+                            .into(picture);
+                }
 
-            builder.show();
+                builder.show();
 //            SingleAnimal results = response.body();
 //            randomAnimal = results.getAnimal();
 //            if (randomAnimal == null) {
@@ -309,19 +300,18 @@ public void yipYip(String auth, Integer userId, View.OnClickListener onClickList
 //            }
 
 
+            }
 
-        }
+            @Override
+            public void onFailure(Call<SingleAnimal> call, Throwable t) {
+                Log.d("API TEST", "hello failure");
+                Log.d("API TEST", t.getMessage());
 
-        @Override
-        public void onFailure(Call<SingleAnimal> call, Throwable t) {
-            Log.d("API TEST", "hello failure");
-            Log.d("API TEST", t.getMessage());
-
-        }
-    });
+            }
+        });
 
 
-}
+    }
 
     public void getBasicAnimals(String auth) {
         Log.d("API TEST", auth);
@@ -335,41 +325,41 @@ public void yipYip(String auth, Integer userId, View.OnClickListener onClickList
 //
 
         // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
-      Call<AnimalResults> basicAnimalCall = PetFinderClient.getInstance().petFinderApi.getBasicAnimalList(" Bearer " + auth);
+        Call<AnimalResults> basicAnimalCall = PetFinderClient.getInstance().petFinderApi.getBasicAnimalList(" Bearer " + auth);
         Log.d("API TEST", "hello");
-            basicAnimalCall.enqueue(new Callback <AnimalResults>(){
-                @Override
-                public void onResponse(Call<AnimalResults> call, Response<AnimalResults> response) {
-                    Log.d("API TEST", "inside enqueue");
-                    if (!response.isSuccessful()) {
-                        Log.d("API TEST","Code: " + response.code());
-                        return;
-                    }
-
-
-                    AnimalResults animalResults = response.body();
-                    animalList =  animalResults.animals;
-                    //AnimalAdapter adapter = new AnimalAdapter(generateAnimalList());
-                    AnimalAdapter favAnimaladapter = new AnimalAdapter(generateAnimalList(),petVM,userId,auth,Search.this);
-
-                    recyclerView.setAdapter(favAnimaladapter);
-
-
-                    Animal tempAnimal;
-                    tempAnimal = animalList.get(0);
-                    Log.d("API TEST",""+ tempAnimal.toString());
-
+        basicAnimalCall.enqueue(new Callback<AnimalResults>() {
+            @Override
+            public void onResponse(Call<AnimalResults> call, Response<AnimalResults> response) {
+                Log.d("API TEST", "inside enqueue");
+                if (!response.isSuccessful()) {
+                    Log.d("API TEST", "Code: " + response.code());
+                    return;
                 }
 
-                @Override
-                public void onFailure(Call<AnimalResults> call, Throwable t) {
-                    Log.d("API TEST", "hello failure");
-                    Log.d("API TEST", t.getMessage());
 
-                }
-            });
+                AnimalResults animalResults = response.body();
+                animalList = animalResults.animals;
+                //AnimalAdapter adapter = new AnimalAdapter(generateAnimalList());
+                AnimalAdapter favAnimaladapter = new AnimalAdapter(generateAnimalList(), petVM, userId, auth, Search.this);
 
-        }
+                recyclerView.setAdapter(favAnimaladapter);
+
+
+                Animal tempAnimal;
+                tempAnimal = animalList.get(0);
+                Log.d("API TEST", "" + tempAnimal.toString());
+
+            }
+
+            @Override
+            public void onFailure(Call<AnimalResults> call, Throwable t) {
+                Log.d("API TEST", "hello failure");
+                Log.d("API TEST", t.getMessage());
+
+            }
+        });
+
+    }
 
     public void getFilteredAnimals(String auth) {
         Log.d("API TEST", auth);
@@ -383,36 +373,36 @@ public void yipYip(String auth, Integer userId, View.OnClickListener onClickList
 //
 
         // Call<AnimalResults> basicAnimalCall = petFinderApi.getBasicAnimalList(" Bearer " + auth);
-        if(genderChoice.equals("Any")) {
+        if (genderChoice.equals("Any")) {
             genderChoice = null;
         }
-        if(typeChoice.equals("Any")) {
+        if (typeChoice.equals("Any")) {
             typeChoice = null;
         }
-        if(ageChoice.equals("Any")) {
+        if (ageChoice.equals("Any")) {
             ageChoice = null;
         }
 
-        Call<AnimalResults> filteredAnimalCall = PetFinderClient.getInstance().petFinderApi.getFilteredAnimalList(" Bearer " + auth,genderChoice,typeChoice,ageChoice);
+        Call<AnimalResults> filteredAnimalCall = PetFinderClient.getInstance().petFinderApi.getFilteredAnimalList(" Bearer " + auth, genderChoice, typeChoice, ageChoice);
         Log.d("API TEST", "hello CALL");
-        filteredAnimalCall.enqueue(new Callback <AnimalResults>(){
+        filteredAnimalCall.enqueue(new Callback<AnimalResults>() {
             @Override
             public void onResponse(Call<AnimalResults> call, Response<AnimalResults> response) {
                 Log.d("API TEST", "inside FILTERED enqueue");
                 if (!response.isSuccessful()) {
-                    Log.d("API TEST","Code: " + response.code());
+                    Log.d("API TEST", "Code: " + response.code());
                     return;
                 }
 
                 AnimalResults animalResults = response.body();
-                animalList =  animalResults.animals;
-                AnimalAdapter adapter = new AnimalAdapter(generateAnimalList(), petVM,userId,auth, Search.this);
+                animalList = animalResults.animals;
+                AnimalAdapter adapter = new AnimalAdapter(generateAnimalList(), petVM, userId, auth, Search.this);
 
                 recyclerView.setAdapter(adapter);
 
                 Animal tempAnimal;
                 tempAnimal = animalList.get(0);
-                Log.d("API TEST",""+ tempAnimal.toString());
+                Log.d("API TEST", "" + tempAnimal.toString());
 
             }
 
@@ -430,7 +420,7 @@ public void yipYip(String auth, Integer userId, View.OnClickListener onClickList
         List<AnimalViewModel> animalViewModelList = new ArrayList<>();
         Log.d("API TEST", "ANIMAL LIST");
 
-        for( Animal animal: animalList) {
+        for (Animal animal : animalList) {
             //simpleViewModelList.add(new AnimalViewModel(String.format(Locale.US, "This is item %d", i)));
             animalViewModelList.add(new AnimalViewModel(animal.getmID(), animal.getmName(), animal.getmType(), animal.getmAge(), animal.getmGender()));
         }
@@ -439,12 +429,12 @@ public void yipYip(String auth, Integer userId, View.OnClickListener onClickList
     }
 
 
-    private void populateSpinners(){
+    private void populateSpinners() {
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.type_array, android.R.layout.simple_spinner_item);
-        
+
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        
+
         typeSpinner.setAdapter(typeAdapter);
 
         ArrayAdapter<CharSequence> ageAdapter = ArrayAdapter.createFromResource(this,
@@ -466,9 +456,9 @@ public void yipYip(String auth, Integer userId, View.OnClickListener onClickList
 }
 
 
-        //curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1cEliOUxHMFA2eWNmRTdlQVBWOTNoc3JTR0ZGQnZ3ZWp0MHNlSFJPdUxMWmVrdjVnUyIsImp0aSI6ImIyMjNkMzgwZDZmM2JmOGFkMWMwMTdkYTZiYThhNTE0YjQ2N2FlOTBhZmNiOWU3YTMxODc2ZThjMDAyNWFkNWVjNWRjMzU0ZmQ1Nzg0OGM4IiwiaWF0IjoxNjMxMjA3MDQ3LCJuYmYiOjE2MzEyMDcwNDcsImV4cCI6MTYzMTIxMDY0Nywic3ViIjoiIiwic2NvcGVzIjpbXX0.M9T3vjzEh-rvyzVx5KL4YR7uY_cL7v0K7CN6lUwEFV5YkD-psS6_L9dgNUEpA1JpSt_wKgKOgdv7Be7ouh5cumgB4vfUcoMsBJy0vDUYlFs7AHVwzT8NmLhgNdQQzzF0MA8ggBCypDaRAG8Z98GfZPeO73ivIgHh_Y2Ctv-2pLO5Oq6oKvB7T82H09I-55Ga_DBxUDW8Qe3cBTUjYgyGotuKyV2osme0RBSBORoo8CCE59e3LQ6oMuk9Tau3Tv5q8WSZ6XWzYMmHfTd8v2K_0OZi7SxgEM_xZm1C8te4d75hST689IcFDskE9jLK7QVhlaik7r0fYti7u-LYuWseWQ " GET https://api.petfinder.com/v2/animals
+//curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1cEliOUxHMFA2eWNmRTdlQVBWOTNoc3JTR0ZGQnZ3ZWp0MHNlSFJPdUxMWmVrdjVnUyIsImp0aSI6ImIyMjNkMzgwZDZmM2JmOGFkMWMwMTdkYTZiYThhNTE0YjQ2N2FlOTBhZmNiOWU3YTMxODc2ZThjMDAyNWFkNWVjNWRjMzU0ZmQ1Nzg0OGM4IiwiaWF0IjoxNjMxMjA3MDQ3LCJuYmYiOjE2MzEyMDcwNDcsImV4cCI6MTYzMTIxMDY0Nywic3ViIjoiIiwic2NvcGVzIjpbXX0.M9T3vjzEh-rvyzVx5KL4YR7uY_cL7v0K7CN6lUwEFV5YkD-psS6_L9dgNUEpA1JpSt_wKgKOgdv7Be7ouh5cumgB4vfUcoMsBJy0vDUYlFs7AHVwzT8NmLhgNdQQzzF0MA8ggBCypDaRAG8Z98GfZPeO73ivIgHh_Y2Ctv-2pLO5Oq6oKvB7T82H09I-55Ga_DBxUDW8Qe3cBTUjYgyGotuKyV2osme0RBSBORoo8CCE59e3LQ6oMuk9Tau3Tv5q8WSZ6XWzYMmHfTd8v2K_0OZi7SxgEM_xZm1C8te4d75hST689IcFDskE9jLK7QVhlaik7r0fYti7u-LYuWseWQ " GET https://api.petfinder.com/v2/animals
 
-  //  Gson gson = new GsonBuilder().serializeNulls().create();
+//  Gson gson = new GsonBuilder().serializeNulls().create();
 //
 //        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 //        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

@@ -5,13 +5,11 @@ import com.google.gson.annotations.SerializedName;
 public class AuthApi {
 
     @SerializedName("token_type")
-    public String  tokenType;
+    public String tokenType;
     @SerializedName("expires_in")
     public int expiresIn;
     @SerializedName("access_token")
-    public  String access_token;
-
-
+    public String access_token;
 
 
     public String getAccess_token() {

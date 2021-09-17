@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NAME Placeholder"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +39,7 @@
         android:layout_marginBottom="8dp"
         android:text="Gender Placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivFav"
+        app:layout_constraintEnd_toStartOf="@+id/ivTrash"
         app:layout_constraintStart_toEndOf="@+id/tvTypeFav"
         app:layout_constraintTop_toBottomOf="@+id/tvNameFav" />
 
@@ -57,7 +58,7 @@
         app:srcCompat="@drawable/ic_info" />
 
     <ImageView
-        android:id="@+id/ivFav"
+        android:id="@+id/ivTrash"
         android:layout_width="31dp"
         android:layout_height="32dp"
         android:layout_marginStart="101dp"
@@ -69,5 +70,20 @@
         app:layout_constraintStart_toEndOf="@+id/tvNameFav"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_delete" />
+
+    <TextView
+        android:id="@+id/tvIdFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivTrash"
+        app:layout_constraintStart_toEndOf="@+id/tvTypeFav"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameFav"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

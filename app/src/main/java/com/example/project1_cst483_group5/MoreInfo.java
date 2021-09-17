@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * The type More info.
+ */
 public class MoreInfo extends AppCompatActivity {
 
     @Override

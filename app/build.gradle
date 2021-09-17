@@ -26,10 +26,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
 
+    implementation 'androidx.navigation:navigation-fragment:2.3.5'
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
     def lifecycle_version = "2.4.0-alpha03"
     def room_version = "2.3.0"
 
@@ -54,6 +59,10 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
+
+    //Image Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     testImplementation 'junit:junit:4.13.2'

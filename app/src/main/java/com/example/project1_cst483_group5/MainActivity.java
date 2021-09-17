@@ -1,7 +1,5 @@
 package com.example.project1_cst483_group5;
 
-import static java.sql.Types.NULL;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,48 +14,63 @@ import android.widget.Toast;
 
 import com.example.project1_cst483_group5.db.User;
 import com.example.project1_cst483_group5.db.UserViewModel;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * The User vm.
+     */
     public UserViewModel userVM;
-    public Button loginBtn, createAccBtn;
+    /**
+     * The Login btn.
+     */
+    public Button loginBtn, /**
+     * The Create acc btn.
+     */
+    createAccBtn;
+    /**
+     * The Authorization.
+     */
     AuthApi authorization;
+    /**
+     * The User id.
+     */
+    Integer userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userId = 0;
 
         userVM = new ViewModelProvider(this).get(UserViewModel.class);
         loginBtn = findViewById(R.id.btnLogin);
         createAccBtn = findViewById(R.id.btnCreatePage);
 
         EditText user, password;
-        user = findViewById(R.id.etLoginEmail);
+        user = findViewById(R.id.etLoginUsername);
         password = findViewById(R.id.etLoginPassword);
 
-        if (userVM.getUserCount() == 0) {
-            createUsers();
-        }
+        //Log.d("API TEST", userVM.getUserCount() + ": number of Users");
+        int count = userVM.getUserCount();
+        createUsers(count);
+
 
         getAuth();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getUsersbyUsernameAndPassword(user, password);
+                getUsersByUsernameAndPassword(user, password);
 
             }
         });
@@ -76,26 +89,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void createUsers() {
-        for (int i = 0; i < 3; i++) {
-            User tempUser = new User("User" + (i + 1),"user" + (i + 1), "password" + (i +1));
-            userVM.insert(tempUser);
+    /**
+     * Create users.
+     *
+     * @param count the count
+     */
+    public void createUsers(int count) {
+        Log.d("API TEST", count + " : number of Users");
+        if (count != 0) {
+            for (int i = 0; i < 3; i++) {
+                User tempUser = new User("User" + (i + 1), "user" + (i + 1), "password" + (i + 1));
+                userVM.insert(tempUser);
+            }
         }
+
     }
 
-    public void getUsersbyUsernameAndPassword(EditText username, EditText password) {
+    /**
+     * Gets users by username and password.
+     *
+     * @param username the username
+     * @param password the password
+     */
+    public void getUsersByUsernameAndPassword(EditText username, EditText password) {
         String user, pass;
         user = username.getText().toString();
         pass = password.getText().toString();
         List<User> userLogin = userVM.getUsersByUsernameAndPassword(user, pass);
+
         if (userLogin != null) {
-            login(userLogin.get(0).getMUserID());
+            userId = userLogin.get(0).getMUserID();
+            login();
         } else {
             Toast.makeText(this, "Bad username/password", Toast.LENGTH_LONG).show();
         }
     }
 
-        private void getAuth() {
+    private void getAuth() {
         Log.d("API TEST", "helloooo");
 
         AuthRequest authRequest = new AuthRequest("client_credentials",
@@ -110,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<AuthApi> call, Response<AuthApi> response) {
 
                 if (!response.isSuccessful()) {
-                    Log.d("API TEST","Code: " + response.code());
+                    Log.d("API TEST", "Code: " + response.code());
                     return;
                 }
                 authorization = response.body();
@@ -124,11 +154,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-   }
-    public void login(Integer userId) {
-        Intent intent = Favorites.getIntent(getApplicationContext(),authorization.getAccess_token());
-        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH",authorization.getAccess_token());
-        //intent.putExtra("FAVORITES_COM_PROJ1_G5_ID",userId);
+    }
+
+    /**
+     * Login.
+     */
+    public void login() {
+        Intent intent = Favorites.getIntent(getApplicationContext(), authorization.getAccess_token());
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH", authorization.getAccess_token());
+        intent.putExtra("FAVORITES_COM_PROJ1_G5_ID", userId);
         startActivity(intent);
 //        Intent i = new Intent(getApplicationContext(), Favorites.class);
 //        startActivity(i);
@@ -136,6 +170,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Gets intent.
+     *
+     * @param context the context
+     * @param auth    the auth
+     * @return the intent
+     */
     public static Intent getIntent(Context context, String auth) {
         Intent intent = new Intent(context, Favorites.class);
         intent.putExtra(Favorites.ACTIVITY_LABEL_AUTH, auth);
@@ -144,9 +185,6 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-
-
-/*          ****Example Code***** */
 
 //        Gson gson = new GsonBuilder().serializeNulls().create();
 //
@@ -164,7 +202,6 @@ public class MainActivity extends AppCompatActivity {
 //                .build();
 //
 //        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
-
 
 
 //    Log.d(;"API TEST", petFinderApi.Auth("client_credential",

@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Favorites">
 
+    <Button
+        android:id="@+id/btnRefresh"
+        android:layout_width="111dp"
+        android:layout_height="60dp"
+        android:text="@string/refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogoutFavPage"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toEndOf="@+id/btnSearchFavPage"
+        app:layout_constraintTop_toBottomOf="@+id/rvFavorites"
+        app:layout_constraintVertical_bias="0.511" />
+
     <TextView
         android:id="@+id/tvFavoritesTitle"
         android:layout_width="wrap_content"
@@ -19,33 +31,33 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavorites"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="412dp"
+        android:layout_height="394dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSearchFavPage"
-        app:layout_constraintTop_toBottomOf="@+id/tvFavoritesTitle"
-        tools:layout_editor_absoluteX="0dp" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFavoritesTitle" />
 
 
     <Button
         android:id="@+id/btnLogoutFavPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
+        android:backgroundTint="#87ceeb"
+        android:text="@string/settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnSearchFavPage"
+        app:layout_constraintStart_toEndOf="@+id/btnRefresh"
         app:layout_constraintTop_toBottomOf="@+id/rvFavorites" />
 
     <Button
         android:id="@+id/btnSearchFavPage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="96dp"
+        android:layout_height="57dp"
+        android:selectAllOnFocus="false"
         android:text="@string/search"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnLogoutFavPage"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/btnRefresh"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvFavorites"
         app:layout_constraintVertical_bias="0.502" />

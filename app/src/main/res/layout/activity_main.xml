@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C0A377"
+    android:background="@color/background_main"
     tools:context=".MainActivity">
 
 
@@ -12,27 +12,40 @@
         android:id="@+id/tvAppTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to APPA!"
+        android:text="Welcome to AAPA!"
         android:textSize="35dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="177dp" />
+        tools:layout_editor_absoluteY="116dp" />
+
+    <TextView
+        android:id="@+id/tvAppTagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(adopt a pet app)"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/etLoginUsername"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppTitle"
+        tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/etLoginEmail"
+        android:id="@+id/etLoginUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="Username"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tvAppTitle"
+        android:hint="Username"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/etLoginPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/etLoginPassword"
-        tools:layout_editor_absoluteY="325dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAppTagline"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -41,21 +54,22 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Password"
         android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLoginEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/etLoginUsername" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
+        android:backgroundTint="#87ceeb"
         android:text="@string/login"
         app:layout_constraintBottom_toTopOf="@+id/btnCreatePage"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="140dp"
+        android:backgroundTint="#87ceeb"
         android:text="@string/create_an_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

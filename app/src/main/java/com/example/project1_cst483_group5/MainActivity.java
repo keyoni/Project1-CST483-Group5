@@ -5,7 +5,9 @@ import static java.sql.Types.NULL;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +24,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+//import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     public UserViewModel userVM;
-    public Button loginBtn, createAccBtn;
+    public Button loginBtn, createAccBtn, logoutBtn;
     AuthApi authorization;
 
     @Override
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,10 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
 
     public void createUsers() {
         for (int i = 0; i < 3; i++) {

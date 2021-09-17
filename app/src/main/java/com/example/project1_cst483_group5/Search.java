@@ -25,7 +25,7 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+//import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +36,7 @@ public class Search extends AppCompatActivity {
 
     public static final String ACTIVITY_LABEL_AUTH = "SEARCH_COM_PROJ1_G5_AUTH";
     public Button favBtn;
-    public Button searchBtn;
+    public Button searchBtn, logoutBtn;
     public Spinner typeSpinner;
     public Spinner ageSpinner;
     public Spinner genderSpinner;
@@ -57,7 +57,7 @@ public class Search extends AppCompatActivity {
 
         favBtn = findViewById(R.id.btnFavSearchPage);
         searchBtn = findViewById(R.id.btnSearch);
-
+        logoutBtn = findViewById(R.id.btnLogoutSearchPage);
         typeSpinner = findViewById(R.id.spType);
         ageSpinner = findViewById(R.id.spAge);
         genderSpinner = findViewById(R.id.spGender);
@@ -96,6 +96,15 @@ public class Search extends AppCompatActivity {
                 toFavoritesPage(auth);
             }
 
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Search.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
         
         

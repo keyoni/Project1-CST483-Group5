@@ -24,7 +24,7 @@ public class Favorites extends AppCompatActivity {
 
     public static final String ACTIVITY_LABEL_AUTH = "FAVORITES_COM_PROJ1_G5_AUTH";
     //public static final String ACTIVITY_LABEL_ID = "FAVORITES_COM_PROJ1_G5_ID";
-    public Button searchBtn;
+    public Button searchBtn, logoutBtn;
     public PetViewModel petVM;
     RecyclerView recyclerView;
     public List<Pet> pets;
@@ -52,6 +52,15 @@ public class Favorites extends AppCompatActivity {
                 toSearchPage(auth);
             }
 
+        });
+        logoutBtn = findViewById(R.id.btnLogoutSearchPage);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Favorites.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
         PetListAdapter petAdapter = new PetListAdapter(generateAnimalList(),petVM);

@@ -29,11 +29,29 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * The User vm.
+     */
     public UserViewModel userVM;
-    public Button loginBtn, createAccBtn;
+    /**
+     * The Login btn.
+     */
+    public Button loginBtn, /**
+     * The Create acc btn.
+     */
+    createAccBtn;
+    /**
+     * The Authorization.
+     */
     AuthApi authorization;
+    /**
+     * The User id.
+     */
     Integer userId;
 
     @Override
@@ -79,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Create users.
+     *
+     * @param count the count
+     */
     public void createUsers(int count) {
         Log.d("API TEST", count + " : number of Users");
         if (count != 0) {
@@ -90,6 +113,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Gets users by username and password.
+     *
+     * @param username the username
+     * @param password the password
+     */
     public void getUsersByUsernameAndPassword(EditText username, EditText password) {
         String user, pass;
         user = username.getText().toString();
@@ -135,6 +164,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Login.
+     */
     public void login() {
         Intent intent = Favorites.getIntent(getApplicationContext(), authorization.getAccess_token());
         intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH", authorization.getAccess_token());
@@ -146,6 +178,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Gets intent.
+     *
+     * @param context the context
+     * @param auth    the auth
+     * @return the intent
+     */
     public static Intent getIntent(Context context, String auth) {
         Intent intent = new Intent(context, Favorites.class);
         intent.putExtra(Favorites.ACTIVITY_LABEL_AUTH, auth);

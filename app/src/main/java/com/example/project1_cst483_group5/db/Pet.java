@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey;
 //TODO:
 //PetViewModel needed.
 
+/**
+ * The type Pet.
+ */
 //pet table should have
 //petID(primary key), userID(foreign key), name, type, gender, id
 @Entity(tableName = "pet_table")
@@ -39,6 +42,15 @@ public class Pet {
     private Integer mID;
 
 
+    /**
+     * Instantiates a new Pet.
+     *
+     * @param mUserID the m user id
+     * @param mName   the m name
+     * @param mType   the m type
+     * @param mGender the m gender
+     * @param mID     the m id
+     */
     public Pet(@NonNull Integer mUserID, @NonNull String mName, @NonNull String mType, @NonNull String mGender, @NonNull Integer mID) {
         Integer petID;
         this.mUserID = mUserID;
@@ -48,58 +60,118 @@ public class Pet {
         this.mID = mID; //from api
     }
 
+    /**
+     * Sets m pet id.
+     *
+     * @param mPetID the m pet id
+     */
     @NonNull
     public void setMPetID(Integer mPetID) {
         this.mPetID = mPetID;
     }
 
+    /**
+     * Gets m pet id.
+     *
+     * @return the m pet id
+     */
     @NonNull
     public Integer getMPetID() {
         return mPetID;
     }
 
+    /**
+     * Gets mid.
+     *
+     * @return the mid
+     */
     @NonNull
     public Integer getMID() {
         return mID;
     }
 
+    /**
+     * Sets mid.
+     *
+     * @param mID the m id
+     */
     public void setMID(@NonNull Integer mID) {
         this.mID = mID;
     }
 
 
+    /**
+     * Gets m user id.
+     *
+     * @return the m user id
+     */
     @NonNull
     public Integer getMUserID() {
         return mUserID;
     }
 
+    /**
+     * Sets m user id.
+     *
+     * @param mUserID the m user id
+     */
     public void setMUserID(@NonNull Integer mUserID) {
         this.mUserID = mUserID;
     }
 
+    /**
+     * Gets m name.
+     *
+     * @return the m name
+     */
     @NonNull
     public String getMName() {
         return mName;
     }
 
+    /**
+     * Sets m name.
+     *
+     * @param mName the m name
+     */
     public void setMName(@NonNull String mName) {
         this.mName = mName;
     }
 
+    /**
+     * Gets m type.
+     *
+     * @return the m type
+     */
     @NonNull
     public String getMType() {
         return mType;
     }
 
+    /**
+     * Sets m type.
+     *
+     * @param mType the m type
+     */
     public void setMType(@NonNull String mType) {
         this.mType = mType;
     }
 
+    /**
+     * Gets m gender.
+     *
+     * @return the m gender
+     */
     @NonNull
     public String getMGender() {
         return mGender;
     }
 
+    /**
+     * Sets m gender.
+     *
+     * @param mGender the m gender
+     */
     public void setMGender(@NonNull String mGender) {
         this.mGender = mGender;
     }

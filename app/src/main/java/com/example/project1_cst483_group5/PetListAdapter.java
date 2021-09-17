@@ -27,6 +27,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * The type Pet list adapter.
+ */
 public class PetListAdapter extends RecyclerView.Adapter {
 
     private List<PetListViewModel> petListViewModels = new ArrayList<>();
@@ -34,9 +37,20 @@ public class PetListAdapter extends RecyclerView.Adapter {
     private final String auth;
     private SingleAnimal animalResult;
     private Animal temp;
+    /**
+     * The Context.
+     */
     Context context;
 
 
+    /**
+     * Instantiates a new Pet list adapter.
+     *
+     * @param petViewModels the pet view models
+     * @param petViewModel  the pet view model
+     * @param auth          the auth
+     * @param context       the context
+     */
     public PetListAdapter(List<PetListViewModel> petViewModels, PetViewModel petViewModel, String auth, Context context) {
         this.petListViewModels = petViewModels;
         this.petVM = petViewModel;

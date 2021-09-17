@@ -39,28 +39,67 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The type Search.
+ */
 public class Search extends AppCompatActivity {
 
+    /**
+     * The constant ACTIVITY_LABEL_AUTH.
+     */
     public static final String ACTIVITY_LABEL_AUTH = "SEARCH_COM_PROJ1_G5_AUTH";
+    /**
+     * The constant ACTIVITY_LABEL_ID.
+     */
     public static final String ACTIVITY_LABEL_ID = "SEARCH_COM_PROJ1_G5_ID";
     private Integer userId;
+    /**
+     * The Fav btn.
+     */
     public Button favBtn;
+    /**
+     * The Search btn.
+     */
     public Button searchBtn;
+    /**
+     * The Type spinner.
+     */
     public Spinner typeSpinner;
+    /**
+     * The Age spinner.
+     */
     public Spinner ageSpinner;
+    /**
+     * The Gender spinner.
+     */
     public Spinner genderSpinner;
+    /**
+     * The Fav add.
+     */
     public ImageView favAdd;
+    /**
+     * The Pet vm.
+     */
     public PetViewModel petVM;
     private String typeChoice;
     private String ageChoice;
     private String genderChoice;
+    /**
+     * The Yip yip btn.
+     */
     public Button yipYipBtn;
     private Button logoutBtn;
     private SingleAnimal animalResult;
     private Animal randomAnimal;
 
-    //TODO: Return this an a thing later??
+    /**
+     * The Animal list.
+     */
+//TODO: Return this an a thing later??
     List<Animal> animalList;
+    /**
+     * The Recycler view.
+     */
     RecyclerView recyclerView;
 
     @Override
@@ -158,9 +197,10 @@ public class Search extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Search.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                toSettingsPage();
+//                Intent intent = new Intent(Search.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
             }
         });
 
@@ -183,11 +223,22 @@ public class Search extends AppCompatActivity {
 
     //}
 
-    public void favEvent(Context context) {
-        Log.d("API TEST", "In FAV EVENT");
-        Toast.makeText(Search.this, "CLICK ON", Toast.LENGTH_SHORT).show();
+    /**
+     * To settings page.
+     */
+    public void toSettingsPage() {
+        Intent intent = Settings.getIntent(getApplicationContext(), userId);
+        intent.putExtra("SETTINGS_COM_PROJ1_G5_ID", userId);
+        startActivity(intent);
     }
 
+    /**
+     * Gets intent.
+     *
+     * @param context the context
+     * @param auth    the auth
+     * @return the intent
+     */
     public static Intent getIntent(Context context, String auth) {
         Intent intent = new Intent(context, Search.class);
 
@@ -197,31 +248,25 @@ public class Search extends AppCompatActivity {
 
     }
 
+    /**
+     * To favorites page.
+     *
+     * @param auth the auth
+     */
     public void toFavoritesPage(String auth) {
         Intent intent = Favorites.getIntent(getApplicationContext(), auth);
         intent.putExtra("SEARCH_COM_PROJ1_G5_AUTH", auth);
         startActivity(intent);
     }
 
+    /**
+     * Yip yip.
+     *
+     * @param auth            the auth
+     * @param userId          the user id
+     * @param onClickListener the on click listener
+     */
     public void yipYip(String auth, Integer userId, View.OnClickListener onClickListener) {
-
-
-        Gson gson = new GsonBuilder().serializeNulls().create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.petfinder.com/v2/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
 
         Random randId = new Random();
 
@@ -232,8 +277,8 @@ public class Search extends AppCompatActivity {
         int int_rand = randId.nextInt(upperbound);
 
 
-        //Call<Animal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  parseInt(((AnimalViewHolder) holder).id.getText().toString()));
-        Call<SingleAnimal> animalCall = petFinderApi.getAnimalById(" Bearer " + auth, base + int_rand);
+        Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  base + int_rand);
+        //Call<SingleAnimal> animalCall = petFinderApi.getAnimalById(" Bearer " + auth, base + int_rand);
         animalCall.enqueue(new Callback<SingleAnimal>() {
             @Override
             public void onResponse(Call<SingleAnimal> call, Response<SingleAnimal> response) {
@@ -313,6 +358,11 @@ public class Search extends AppCompatActivity {
 
     }
 
+    /**
+     * Gets basic animals.
+     *
+     * @param auth the auth
+     */
     public void getBasicAnimals(String auth) {
         Log.d("API TEST", auth);
         Log.d("API TEST", "helloooo");
@@ -361,6 +411,11 @@ public class Search extends AppCompatActivity {
 
     }
 
+    /**
+     * Gets filtered animals.
+     *
+     * @param auth the auth
+     */
     public void getFilteredAnimals(String auth) {
         Log.d("API TEST", auth);
         Log.d("API TEST", "In FILTERED ANIMALs");

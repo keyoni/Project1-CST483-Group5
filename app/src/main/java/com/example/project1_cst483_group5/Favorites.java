@@ -21,15 +21,42 @@ import com.example.project1_cst483_group5.db.PetViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Favorites.
+ */
 public class Favorites extends AppCompatActivity {
 
+    /**
+     * The constant ACTIVITY_LABEL_AUTH.
+     */
     public static final String ACTIVITY_LABEL_AUTH = "FAVORITES_COM_PROJ1_G5_AUTH";
+    /**
+     * The constant ACTIVITY_LABEL_ID.
+     */
     public static final String ACTIVITY_LABEL_ID = "FAVORITES_COM_PROJ1_G5_ID";
+    /**
+     * The Search btn.
+     */
     public Button searchBtn;
+    /**
+     * The Refresh btn.
+     */
     public Button refreshBtn;
+    /**
+     * The Logout btn.
+     */
     public Button logoutBtn;
+    /**
+     * The Pet vm.
+     */
     public PetViewModel petVM;
+    /**
+     * The Recycler view.
+     */
     RecyclerView recyclerView;
+    /**
+     * The Pets.
+     */
     public List<Pet> pets;
     private Integer userId;
     private String auth;
@@ -117,6 +144,13 @@ public class Favorites extends AppCompatActivity {
     }
 
 
+    /**
+     * Gets intent.
+     *
+     * @param context the context
+     * @param auth    the auth
+     * @return the intent
+     */
     public static Intent getIntent(Context context, String auth) {
         Intent intent = new Intent(context, Favorites.class);
 
@@ -126,6 +160,11 @@ public class Favorites extends AppCompatActivity {
 
     }
 
+    /**
+     * To search page.
+     *
+     * @param auth the auth
+     */
     public void toSearchPage(String auth) {
         Intent intent = Search.getIntent(getApplicationContext(), auth);
         intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH", auth);
@@ -135,6 +174,9 @@ public class Favorites extends AppCompatActivity {
 
     }
 
+    /**
+     * To settings page.
+     */
     public void toSettingsPage() {
         Intent intent = Settings.getIntent(getApplicationContext(), userId);
         intent.putExtra("SETTINGS_COM_PROJ1_G5_ID", userId);

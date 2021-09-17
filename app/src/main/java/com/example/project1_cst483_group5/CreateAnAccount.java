@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+/**
+ * The type Create an account.
+ */
 public class CreateAnAccount extends AppCompatActivity {
 
     @Override
@@ -18,6 +21,13 @@ public class CreateAnAccount extends AppCompatActivity {
     }
 
 
+    /**
+     * Gets intent.
+     *
+     * @param context the context
+     * @param auth    the auth
+     * @return the intent
+     */
     public static Intent getIntent(Context context, String auth) {
         Intent intent = new Intent(context, CreateAnAccount.class);
         return intent;

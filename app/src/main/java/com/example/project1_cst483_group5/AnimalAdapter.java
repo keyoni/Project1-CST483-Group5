@@ -35,6 +35,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The type Animal adapter.
+ */
 public class AnimalAdapter extends RecyclerView.Adapter {
 
     private List<AnimalViewModel> animalViewModels = new ArrayList<>();
@@ -43,8 +46,20 @@ public class AnimalAdapter extends RecyclerView.Adapter {
     private final String auth;
     private SingleAnimal animalResult;
     private Animal temp;
+    /**
+     * The Context.
+     */
     Context context;
 
+    /**
+     * Instantiates a new Animal adapter.
+     *
+     * @param animalViewModels the animal view models
+     * @param petViewModel     the pet view model
+     * @param userId           the user id
+     * @param auth             the auth
+     * @param context          the context
+     */
     public AnimalAdapter(List<AnimalViewModel> animalViewModels, PetViewModel petViewModel, Integer userId, String auth, Context context) {
         this.animalViewModels = animalViewModels;
         this.petVM = petViewModel;

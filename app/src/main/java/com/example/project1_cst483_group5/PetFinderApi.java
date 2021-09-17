@@ -13,22 +13,53 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+/**
+ * The interface Pet finder api.
+ */
 public interface PetFinderApi {
 
 
+    /**
+     * Auth call.
+     *
+     * @param authRequest the auth request
+     * @return the call
+     */
     @POST("oauth2/token")
     Call<AuthApi> Auth(@Body AuthRequest authRequest);
 
 
+    /**
+     * Gets basic animal list.
+     *
+     * @param auth the auth
+     * @return the basic animal list
+     */
     @GET("animals")
     Call<AnimalResults> getBasicAnimalList(@Header("Authorization") String auth);
 
+    /**
+     * Gets filtered animal list.
+     *
+     * @param auth   the auth
+     * @param gender the gender
+     * @param type   the type
+     * @param age    the age
+     * @return the filtered animal list
+     */
     @GET("animals")
     Call<AnimalResults> getFilteredAnimalList(@Header("Authorization") String auth,
                                               @Query("gender") String gender,
                                               @Query("type") String type,
                                               @Query("age") String age);
 
+    /**
+     * Gets animal by id.
+     *
+     * @param auth the auth
+     * @param id   the id
+     * @return the animal by id
+     */
     @GET("animals/{id}")
     Call<SingleAnimal> getAnimalById(@Header("Authorization") String auth,
                                      @Path("id") Integer id);

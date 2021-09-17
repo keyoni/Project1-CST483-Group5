@@ -72,7 +72,7 @@ public class PetListAdapter extends RecyclerView.Adapter {
         ((PetListViewHolder) holder).trashBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Refresh to see updated list" + ((PetListViewHolder) holder).id.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Refresh to see updated list", Toast.LENGTH_SHORT).show();
 
                 petVM.deletePet(parseInt(((PetListViewHolder) holder).id.getText().toString()));
             }

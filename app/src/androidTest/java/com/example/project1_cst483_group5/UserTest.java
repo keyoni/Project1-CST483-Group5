@@ -58,7 +58,7 @@ public class UserTest {
                 .build();
 
         userDao = db.userDao();
-        //userVM = new ViewModelProvider(this).get(UserViewModel.class);
+
 
 
     }

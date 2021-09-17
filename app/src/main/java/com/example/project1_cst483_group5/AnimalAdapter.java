@@ -82,6 +82,7 @@ public class AnimalAdapter extends RecyclerView.Adapter {
         ((AnimalViewHolder) holder).favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(context,"Favorite!",Toast.LENGTH_LONG).show();
                 Pet tempPet = new Pet(userId, ((AnimalViewHolder) holder).name.getText().toString(),
                         ((AnimalViewHolder) holder).type.getText().toString(),
                         ((AnimalViewHolder) holder).gender.getText().toString(),

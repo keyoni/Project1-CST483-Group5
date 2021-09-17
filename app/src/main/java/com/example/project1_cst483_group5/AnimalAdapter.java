@@ -82,7 +82,6 @@ public class AnimalAdapter extends RecyclerView.Adapter {
         ((AnimalViewHolder) holder).favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Favorited" + userId.toString(), Toast.LENGTH_SHORT).show();
                 Pet tempPet = new Pet(userId, ((AnimalViewHolder) holder).name.getText().toString(),
                         ((AnimalViewHolder) holder).type.getText().toString(),
                         ((AnimalViewHolder) holder).gender.getText().toString(),
@@ -95,8 +94,6 @@ public class AnimalAdapter extends RecyclerView.Adapter {
         ((AnimalViewHolder) holder).infoBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("API TEST", "inside info onclick ANIMAL");
-                Log.d("API TEST", ((AnimalViewHolder) holder).id.getText().toString());
 
                 Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth, parseInt(((AnimalViewHolder) holder).id.getText().toString()));
 
@@ -168,6 +165,18 @@ public class AnimalAdapter extends RecyclerView.Adapter {
 
     }
 
+    @Override
+    public int getItemCount() {
+        return animalViewModels.size();
+    }
+
+    @Override
+    public int getItemViewType(final int position) {
+        return R.layout.search_item;
+    }
+}
+
+
 
 //                    Gson gson = new GsonBuilder().serializeNulls().create();
 //
@@ -184,64 +193,6 @@ public class AnimalAdapter extends RecyclerView.Adapter {
 //                            .client(client)
 //                            .build();
 //
-//                    PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
-//
-//
-//
-//                //Call<Animal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth,  parseInt(((AnimalViewHolder) holder).id.getText().toString()));
-//                Call<SingleAnimal> animalCall = petFinderApi.getAnimalById(" Bearer " + auth,  parseInt(((AnimalViewHolder) holder).id.getText().toString()));
-//                animalCall.enqueue(new Callback<SingleAnimal>(){
-//                    @Override
-//                    public void onResponse(Call<SingleAnimal> call, Response<SingleAnimal> response) {
-//                        Log.d("API TEST", "inside SINGLE ANIMAL");
-//                        if (!response.isSuccessful()) {
-//                            Log.d("API TEST","Code: " + response.code());
-//                            return;
-//                        }
-//
-//                        animalResult = response.body();
-//                        Log.d("API TEST", animalResult.getAnimal().mName + "");
-//
-//
-//
-//
-//
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<SingleAnimal> call, Throwable t) {
-//                        Log.d("API TEST", "hello failure");
-//                        Log.d("API TEST", t.getMessage());
-//
-//                    }
-//                });
 
-//
-//                showAlertDialog(view.getContext(), this);
-////                Toast.makeText(view.getContext(), "CLICK ON INFO Model Page", Toast.LENGTH_SHORT).show();
-//            }
-//            private void showAlertDialog(Context context, View.OnClickListener onClickListener) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setTitle("More Info!");
-//                //builder.setMessage(((AnimalViewHolder) holder).id.getText().toString() + " " +     ((AnimalViewHolder) holder).type.getText().toString()+ " " +
-//               //builder.setMessage((animalResult.getAnimal().getmName()));
-//             builder.setMessage(("I'm Broken"));
-//                builder.show();
-    //}
-////
-//        });
-//
-//        }
 
-    @Override
-    public int getItemCount() {
-        return animalViewModels.size();
-    }
 
-    @Override
-    public int getItemViewType(final int position) {
-        return R.layout.search_item;
-    }
-}

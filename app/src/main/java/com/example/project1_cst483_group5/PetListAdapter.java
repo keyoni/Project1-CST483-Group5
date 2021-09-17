@@ -81,15 +81,12 @@ public class PetListAdapter extends RecyclerView.Adapter {
         ((PetListViewHolder) holder).favInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("API TEST", "inside info onclick ANIMAL");
-                Log.d("API TEST", ((PetListViewHolder) holder).id.getText().toString());
 
                 Call<SingleAnimal> animalCall = PetFinderClient.getInstance().petFinderApi.getAnimalById(" Bearer " + auth, parseInt(((PetListViewHolder) holder).id.getText().toString()));
 
                 animalCall.enqueue(new Callback<SingleAnimal>() {
                     @Override
                     public void onResponse(Call<SingleAnimal> call, Response<SingleAnimal> response) {
-                        Log.d("API TEST", "inside SINGLE ANIMAL");
                         if (!response.isSuccessful()) {
                             Log.d("API TEST", "Code: " + response.code());
                             // you don't see this...
@@ -147,7 +144,6 @@ public class PetListAdapter extends RecyclerView.Adapter {
 
                     @Override
                     public void onFailure(Call<SingleAnimal> call, Throwable t) {
-                        Log.d("API TEST", "hello failure");
                         Log.d("API TEST", t.getMessage());
 
                     }

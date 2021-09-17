@@ -12,8 +12,9 @@
         android:id="@+id/tvAppTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to AAPA!"
+        android:text="Welcome to APPA!"
         android:textSize="35dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +25,9 @@
         android:id="@+id/tvAppTagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(adopt a pet app)"
+        android:text="(adopt pet pals app)"
         android:textSize="20dp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/etLoginUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -87,4 +89,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

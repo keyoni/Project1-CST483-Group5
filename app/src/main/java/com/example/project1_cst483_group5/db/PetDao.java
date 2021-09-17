@@ -10,10 +10,6 @@ import androidx.room.RawQuery;
 
 import java.util.List;
 import java.util.jar.Attributes;
-/*Todo:
-- queries based on name, userID, type, gender, or id (seperate identifier to make it easier)
- */
-
 
 /**
  * The interface Pet dao.
@@ -35,7 +31,6 @@ public interface PetDao {
      * Delete all.
      */
     @Query("DELETE FROM pet_table")
-    //not sure why this is an error
     void deleteAll();
 
     /**
@@ -48,14 +43,6 @@ public interface PetDao {
     void deletePet(Integer mID);
 
     /**
-     * Gets pets by i ds.
-     *
-     * @return the pets by i ds
-     */
-    @Query("SELECT * FROM pet_table ORDER BY petID ASC")
-    LiveData<List<Pet>> getPetsByIDs(); //livedata to update changed data that is being observed
-
-    /**
      * Gets pets by user id.
      *
      * @param mUserID the m user id
@@ -63,12 +50,5 @@ public interface PetDao {
      */
     @Query("SELECT * FROM pet_table WHERE userID = :mUserID")
     List<Pet> getPetsByUserID(Integer mUserID);
-    //TODO:update to live data
-    //* these querries are only needed in the user_table
-//    @Query ("SELECT * FROM pet_table WHERE type = :mType")
-//    LiveData<List<Pet>> getPetsByType(String mType);
-//
-//    @Query ("SELECT * FROM pet_table WHERE gender = :mGender")
-//    LiveData<List<Pet>> getPetsBygender(String mGender);
 
 }

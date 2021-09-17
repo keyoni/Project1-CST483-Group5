@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         user = findViewById(R.id.etLoginUsername);
         password = findViewById(R.id.etLoginPassword);
 
-        //Log.d("API TEST", userVM.getUserCount() + ": number of Users");
         int count = userVM.getUserCount();
         createUsers(count);
 
@@ -164,9 +163,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("FAVORITES_COM_PROJ1_G5_AUTH", authorization.getAccess_token());
         intent.putExtra("FAVORITES_COM_PROJ1_G5_ID", userId);
         startActivity(intent);
-//        Intent i = new Intent(getApplicationContext(), Favorites.class);
-//        startActivity(i);
-
 
     }
 
@@ -202,8 +198,3 @@ public class MainActivity extends AppCompatActivity {
 //                .build();
 //
 //        PetFinderApi petFinderApi = retrofit.create(PetFinderApi.class);
-
-
-//    Log.d(;"API TEST", petFinderApi.Auth("client_credential",
-//            "upIb9LG0P6ycfE7eAPV93hsrSGFFBvwejt0seHROuLLZekv5gS",
-//            "PNUfd2VyDeiulTuuwpOAv0pvYo3fO8LS1e9eHHfu").url())

@@ -4,14 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-//TODO:
-//PetViewModel needed.
-
 /**
  * The type Pet.
  */
-//pet table should have
-//petID(primary key), userID(foreign key), name, type, gender, id
 @Entity(tableName = "pet_table")
 public class Pet {
 

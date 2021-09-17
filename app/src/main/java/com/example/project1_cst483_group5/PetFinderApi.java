@@ -65,20 +65,4 @@ public interface PetFinderApi {
                                      @Path("id") Integer id);
 
 
-//    @FormUrlEncoded
-//    @POST("oauth2/token")
-//     Call<AuthApi> Auth(@Field("grant_type") String grant_type,
-//                        @Field("client_id") String client_id,
-//                        @Field ("client_secret") String client_secret);
-
-//    @Headers({
-//            "grant_type: client_credential",
-//            "client_id: upIb9LG0P6ycfE7eAPV93hsrSGFFBvwejt0seHROuLLZekv5gS",
-//            "client_secret: PNUfd2VyDeiulTuuwpOAv0pvYo3fO8LS1e9eHHfu"
-//    })
-//    @POST("oauth2/token")
-//    Call<AuthApi> Auth();
-
-//
-
 }

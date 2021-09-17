@@ -72,9 +72,4 @@ public class CreateAnAccount extends AppCompatActivity {
     }
 
 
-//    public static Intent getIntent(Context context, String auth) {
-//        Intent intent = new Intent(context, CreateAnAccount.class);
-//        return intent;
-//
-//    }
 }

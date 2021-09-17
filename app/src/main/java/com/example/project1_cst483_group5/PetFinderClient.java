@@ -19,17 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PetFinderClient {
     //help from https://www.section.io/engineering-education/making-api-requests-using-retrofit-android/
     private static PetFinderClient instance = null;
-    // private PetFinderApi petFinderApi;
-
-
-//    Gson gson = new GsonBuilder().serializeNulls().create();
-//
-//    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//
-//    OkHttpClient client = new OkHttpClient.Builder()
-//            .addInterceptor(interceptor)
-//            .build();
 
     /**
      * The Retrofit.
@@ -37,7 +26,6 @@ public class PetFinderClient {
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.petfinder.com/v2/")
             .addConverterFactory(GsonConverterFactory.create())
-            //.client(client)
             .build();
 
     /**

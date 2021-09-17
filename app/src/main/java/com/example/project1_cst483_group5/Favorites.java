@@ -81,12 +81,7 @@ public class Favorites extends AppCompatActivity {
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 generateAnimalList();
-//                PetListAdapter petAdapter = new PetListAdapter(generateAnimalList(),petVM);
-//
-//                recyclerView.setAdapter(petAdapter);
-
             }
         });
         searchBtn = findViewById(R.id.btnSearchFavPage);
@@ -103,10 +98,8 @@ public class Favorites extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 toSettingsPage();
-//                Intent intent = new Intent(Favorites.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
             }
+
         });
 
 
@@ -114,11 +107,9 @@ public class Favorites extends AppCompatActivity {
 
     private List<PetListViewModel> generateAnimalList() {
         List<PetListViewModel> petListViewModelList = new ArrayList<>();
-        Log.d("API TEST", "ANIMAL LIST" + userId);
 
         pets = petVM.getPetsByUserID(userId);
 
-        //Toast.makeText(Favorites.this, pets.get(0).getMName() + " is here", Toast.LENGTH_SHORT).show();
         if (pets == null || pets.isEmpty()) {
             Toast.makeText(Favorites.this, "Refresh to See List", Toast.LENGTH_SHORT).show();
 
@@ -126,7 +117,6 @@ public class Favorites extends AppCompatActivity {
             Toast.makeText(Favorites.this, pets.get(0).getMName() + " is here", Toast.LENGTH_SHORT).show();
 
             for (Pet animal : pets) {
-                //simpleViewModelList.add(new AnimalViewModel(String.format(Locale.US, "This is item %d", i)));
                 petListViewModelList.add(new PetListViewModel(animal.getMID(),
                         animal.getMName(),
                         animal.getMType(),
@@ -136,8 +126,6 @@ public class Favorites extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
 
         PetListAdapter petAdapter = new PetListAdapter(petListViewModelList, petVM, auth, Favorites.this);
-        //petAdapter.notifyDataSetChanged();
-
         recyclerView.setAdapter(petAdapter);
 
         return petListViewModelList;

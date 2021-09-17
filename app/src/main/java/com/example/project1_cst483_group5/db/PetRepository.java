@@ -28,7 +28,7 @@ public class PetRepository {
     PetRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         mPetDao = db.petDao();
-        //mAllPets = mPetDao.getPetsByIDs();
+
 
     }
 

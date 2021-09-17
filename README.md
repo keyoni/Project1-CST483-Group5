@@ -6,6 +6,7 @@ Users may also favorite the pets that they would like to view again for adpotion
 - [ROOM](https://developer.android.com/reference/androidx/room/package-summary) (android persistance library)
 - [Retrofit](https://square.github.io/retrofit/)
 - [okHTTP](https://square.github.io/okhttp/)
+- [Picasso](https://square.github.io/picasso/#features)
 
 ## API:
 - [PetFinder](https://www.petfinder.com/developers/v2/docs/)

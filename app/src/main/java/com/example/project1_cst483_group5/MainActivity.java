@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-/*          ****Example Code***** */
+
 
 //        Gson gson = new GsonBuilder().serializeNulls().create();
 //

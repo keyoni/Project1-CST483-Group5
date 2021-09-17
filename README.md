@@ -1,4 +1,4 @@
-# Project1-CST483-Group5: AAPA
+# Project1-CST483-Group5: APPA
 This app allows the user to create an account and find pets to adopt. Adoption is based on certain criteria that can be filtered by the user. 
 Users may also favorite the pets that they would like to view again for adpotion.
 

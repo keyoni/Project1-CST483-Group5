@@ -53,15 +53,15 @@ public class Favorites extends AppCompatActivity {
             }
 
         });
-        logoutBtn = findViewById(R.id.btnLogoutSearchPage);
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Favorites.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        logoutBtn = findViewById(R.id.btnLogoutSearchPage);
+//        logoutBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Favorites.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 
         PetListAdapter petAdapter = new PetListAdapter(generateAnimalList(),petVM);
 

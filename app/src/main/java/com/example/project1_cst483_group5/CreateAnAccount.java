@@ -30,7 +30,7 @@ public class CreateAnAccount extends AppCompatActivity {
                 EditText cname, cpassword, cemail;
                 String name, password, username;
                 boolean isValid = true;
-                cemail = findViewById(R.id.etLoginEmail);
+                cemail = findViewById(R.id.etCreateEmail);
                 cname = findViewById(R.id.etFirstName);
                 cpassword = findViewById(R.id.etCreatePassword);
                 name = cname.getText().toString();
@@ -43,7 +43,7 @@ public class CreateAnAccount extends AppCompatActivity {
                 }
                     User newUser = new User(name, username, password);
                     userVM.insert(newUser);
-                    startActivity(new Intent(CreateAnAccount.this, Favorites.class));
+                    startActivity(new Intent(CreateAnAccount.this, MainActivity.class));
                     Log.d("testCreateAcc", "this is working");
             }
         });
